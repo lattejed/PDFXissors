@@ -6,4 +6,11 @@
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
+    #import <Quartz/Quartz.h>
+
+    #import "Configuration.h"
+    #import "Notifications.h"
+    #import "NSString+UUID.h"
+    #import "NSPopUpButton+LJBlocks.h"
+    #import "NSButton+LJBlocks.h"
 #endif

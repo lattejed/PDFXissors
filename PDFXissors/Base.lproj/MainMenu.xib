@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+        <plugIn identifier="com.apple.pdfkit.ibplugin" version="3336"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -646,21 +647,299 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="PDFXissors" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371" customClass="RSCustomWindow">
+        <window title="PDFXissors" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371" customClass="INAppStoreWindow">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="480" height="360"/>
+            <rect key="contentRect" x="335" y="390" width="589" height="360"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
             <view key="contentView" id="372">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
+                <rect key="frame" x="0.0" y="0.0" width="589" height="360"/>
                 <autoresizingMask key="autoresizingMask"/>
             </view>
         </window>
         <customObject id="494" customClass="RSAppDelegate">
             <connections>
+                <outlet property="leftPaneSplitView" destination="68u-tB-dSD" id="3gA-yT-Rwo"/>
+                <outlet property="leftToolbarView" destination="63T-1P-Q5w" id="df5-zt-rmQ"/>
+                <outlet property="righPanetSplitView" destination="qN1-5H-YLB" id="igO-AT-vxo"/>
+                <outlet property="rightToolbarView" destination="c9C-4C-GGf" id="et7-Uw-ycE"/>
+                <outlet property="splitView" destination="TDt-2Z-fqd" id="GNy-wh-6Cx"/>
                 <outlet property="window" destination="371" id="532"/>
             </connections>
         </customObject>
         <customObject id="420" customClass="NSFontManager"/>
+        <customView id="63T-1P-Q5w" userLabel="Left Toolbar">
+            <rect key="frame" x="0.0" y="0.0" width="591" height="38"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button verticalHuggingPriority="750" id="134-xe-eTn">
+                    <rect key="frame" x="10" y="9" width="26" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="folder_open_icon&amp;16" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FF8-5Y-MzO">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="systemBold" size="12"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" id="cet-aU-17t">
+                    <rect key="frame" x="53" y="9" width="26" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="br_prev_icon&amp;16" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bAD-0n-FMU">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="systemBold" size="12"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" id="sMy-tH-btr">
+                    <rect key="frame" x="166" y="9" width="26" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="br_next_icon&amp;16" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gZq-Ww-7Ql">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="systemBold" size="12"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" id="LLy-Uv-bfG">
+                    <rect key="frame" x="209" y="9" width="26" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="round_plus_icon&amp;16" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zLM-ZV-uMZ">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="systemBold" size="12"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" id="dhi-oH-wcP">
+                    <rect key="frame" x="243" y="9" width="26" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="round_minus_icon&amp;16" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PA2-lZ-o1g">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="systemBold" size="12"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" id="aom-f2-jx0">
+                    <rect key="frame" x="286" y="9" width="26" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="target_icon&amp;16" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3kk-n1-TWX">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                        <font key="font" metaFont="systemBold" size="12"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" id="ONy-Pf-kam">
+                    <rect key="frame" x="320" y="9" width="26" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="text_curstor_icon&amp;16" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="U2J-hK-aF9">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                        <font key="font" metaFont="systemBold" size="12"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" id="zsM-D4-czD">
+                    <rect key="frame" x="363" y="9" width="26" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="clipboard_copy_icon&amp;16" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7S1-hN-jqp">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="systemBold" size="12"/>
+                    </buttonCell>
+                </button>
+                <box autoresizesSubviews="NO" horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="Wxk-Hf-kfu">
+                    <rect key="frame" x="42" y="10" width="5" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <font key="titleFont" metaFont="system"/>
+                </box>
+                <box autoresizesSubviews="NO" horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="AxO-NJ-AaA">
+                    <rect key="frame" x="198" y="10" width="5" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <font key="titleFont" metaFont="system"/>
+                </box>
+                <box autoresizesSubviews="NO" horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="aPc-JD-4hh">
+                    <rect key="frame" x="275" y="10" width="5" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <font key="titleFont" metaFont="system"/>
+                </box>
+                <box autoresizesSubviews="NO" horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="OKt-Uq-ORz">
+                    <rect key="frame" x="352" y="10" width="5" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <font key="titleFont" metaFont="system"/>
+                </box>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="mGW-lS-gI7">
+                    <rect key="frame" x="85" y="11" width="75" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="999 of 999" id="iG3-yP-5ui">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" white="0.75" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+        </customView>
+        <customView id="c9C-4C-GGf" userLabel="Right Toolbar">
+            <rect key="frame" x="0.0" y="0.0" width="591" height="38"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button verticalHuggingPriority="750" id="knL-il-MP8">
+                    <rect key="frame" x="10" y="9" width="26" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="doc_plus_icon&amp;16" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Db8-rf-O0b">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="systemBold" size="12"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" id="JPj-tP-dFj">
+                    <rect key="frame" x="53" y="9" width="26" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="br_prev_icon&amp;16" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gPz-IR-HBq">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="systemBold" size="12"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" id="aLQ-Oz-Ouj">
+                    <rect key="frame" x="166" y="9" width="26" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="br_next_icon&amp;16" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="f9n-Dn-Qxv">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="systemBold" size="12"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" id="c7t-aq-9QN">
+                    <rect key="frame" x="209" y="9" width="26" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="round_plus_icon&amp;16" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iJa-TR-xgg">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="systemBold" size="12"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" id="zHC-V9-L7k">
+                    <rect key="frame" x="243" y="9" width="26" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="round_minus_icon&amp;16" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MiY-ie-kKg">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="systemBold" size="12"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" id="4w3-Lg-nG0">
+                    <rect key="frame" x="286" y="9" width="26" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="picture_icon&amp;16" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6sR-EH-OfN">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="systemBold" size="12"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" id="OVo-gV-qLE">
+                    <rect key="frame" x="320" y="9" width="26" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="text_letter_t_icon&amp;16" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fXJ-4C-wse">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="systemBold" size="12"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" id="44K-AO-Mhl">
+                    <rect key="frame" x="363" y="9" width="26" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="clipboard_past_icon&amp;16" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bOx-Ff-W0x">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="systemBold" size="12"/>
+                    </buttonCell>
+                </button>
+                <box autoresizesSubviews="NO" horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="aat-wg-Yrs">
+                    <rect key="frame" x="42" y="10" width="5" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <font key="titleFont" metaFont="system"/>
+                </box>
+                <box autoresizesSubviews="NO" horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="aR3-Gz-DTl">
+                    <rect key="frame" x="198" y="10" width="5" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <font key="titleFont" metaFont="system"/>
+                </box>
+                <box autoresizesSubviews="NO" horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="8fs-7W-DCN">
+                    <rect key="frame" x="275" y="10" width="5" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <font key="titleFont" metaFont="system"/>
+                </box>
+                <box autoresizesSubviews="NO" horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="9y7-5N-zUB">
+                    <rect key="frame" x="352" y="10" width="5" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <font key="titleFont" metaFont="system"/>
+                </box>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="ggr-0T-DEi">
+                    <rect key="frame" x="85" y="11" width="75" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="999 of 999" id="beC-5d-hNq">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" white="0.75" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+        </customView>
+        <splitView dividerStyle="paneSplitter" vertical="YES" id="TDt-2Z-fqd">
+            <rect key="frame" x="0.0" y="0.0" width="589" height="449"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <customView id="68u-tB-dSD">
+                    <rect key="frame" x="0.0" y="0.0" width="292" height="449"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <subviews>
+                        <pdfView autoresizesSubviews="NO" wantsLayer="YES" id="rqa-Xo-fYR">
+                            <rect key="frame" x="10" y="10" width="282.5" height="429"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </pdfView>
+                    </subviews>
+                </customView>
+                <customView id="qN1-5H-YLB">
+                    <rect key="frame" x="302" y="0.0" width="287" height="449"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <subviews>
+                        <pdfView autoresizesSubviews="NO" wantsLayer="YES" id="hbT-Ie-GSq">
+                            <rect key="frame" x="0.0" y="10" width="277.5" height="429"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </pdfView>
+                    </subviews>
+                </customView>
+            </subviews>
+            <holdingPriorities>
+                <real value="250"/>
+                <real value="250"/>
+            </holdingPriorities>
+        </splitView>
+        <customObject id="EMN-ab-a6x" customClass="LJSourceViewController">
+            <connections>
+                <outlet property="doCopyButton" destination="zsM-D4-czD" id="gas-XP-3Mx"/>
+                <outlet property="openFileButton" destination="134-xe-eTn" id="uWO-2I-hBq"/>
+                <outlet property="pageBackButton" destination="cet-aU-17t" id="ta4-pZ-ojf"/>
+                <outlet property="pageFwdButton" destination="sMy-tH-btr" id="4OJ-GE-pk0"/>
+                <outlet property="pageTextField" destination="mGW-lS-gI7" id="df5-CR-6rb"/>
+                <outlet property="pdfView" destination="rqa-Xo-fYR" id="0fp-WY-Lv6"/>
+                <outlet property="rectSelectButton" destination="aom-f2-jx0" id="drI-0P-c7Q"/>
+                <outlet property="textSelectButton" destination="ONy-Pf-kam" id="fWY-Ys-peg"/>
+                <outlet property="view" destination="68u-tB-dSD" id="frZ-N8-PEU"/>
+                <outlet property="zoomInButton" destination="LLy-Uv-bfG" id="pQt-ru-BLK"/>
+                <outlet property="zoomOutButton" destination="dhi-oH-wcP" id="NqJ-aM-NR0"/>
+            </connections>
+        </customObject>
     </objects>
+    <resources>
+        <image name="br_next_icon&amp;16" width="16" height="16"/>
+        <image name="br_prev_icon&amp;16" width="16" height="16"/>
+        <image name="clipboard_copy_icon&amp;16" width="16" height="16"/>
+        <image name="clipboard_past_icon&amp;16" width="16" height="16"/>
+        <image name="doc_plus_icon&amp;16" width="16" height="16"/>
+        <image name="folder_open_icon&amp;16" width="16" height="16"/>
+        <image name="picture_icon&amp;16" width="16" height="16"/>
+        <image name="round_minus_icon&amp;16" width="16" height="16"/>
+        <image name="round_plus_icon&amp;16" width="16" height="16"/>
+        <image name="target_icon&amp;16" width="16" height="16"/>
+        <image name="text_curstor_icon&amp;16" width="16" height="16"/>
+        <image name="text_letter_t_icon&amp;16" width="16" height="16"/>
+    </resources>
 </document>
