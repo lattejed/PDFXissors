@@ -8,30 +8,35 @@
 
 #import "LJDestinationViewController.h"
 #import <Quartz/Quartz.h>
-#import "LJBorderedView.h"
-#import "LJDestinationView.h"
-#import "LJDestinationPDF.h"
-#import "LJSourcePDFs.h"
-#import "LJDragResizeView.h"
-#import "LJDestinationSelectionView.h"
-#import "LJPDFSelection.h"
-#import "LJPDFClipView.h"
-#import "LJPDFSelections.h"
-#import "LJContentViewWithCloseButton.h"
+//#import "LJBorderedView.h"
+#import "RSPDFView.h"
+#import "RSDestinationPDF.h"
+//#import "LJDestinationView.h"
+//#import "LJDestinationPDF.h"
+//#import "LJSourcePDFs.h"
+//#import "LJDragResizeView.h"
+//#import "LJDestinationSelectionView.h"
+//#import "LJPDFSelection.h"
+//#import "LJPDFClipView.h"
+//#import "LJPDFSelections.h"
+//#import "LJContentViewWithCloseButton.h"
 
 @interface LJDestinationViewController ()
 
-@property (nonatomic, weak) IBOutlet LJBorderedView* menuView;
-@property (nonatomic, weak) IBOutlet NSPopUpButton* selectSizePopup;
-@property (nonatomic, weak) IBOutlet NSPopUpButton* addItemPopup;
-@property (nonatomic, weak) IBOutlet NSButton* portraitButton;
-@property (nonatomic, weak) IBOutlet NSButton* landscapeButton;
-@property (nonatomic, weak) IBOutlet NSButton* processButton;
-@property (nonatomic, weak) IBOutlet LJDestinationView* destinationView;
-@property (nonatomic, strong) LJDestinationPDF* destinationPDF;
-@property (nonatomic, strong) LJSourcePDFs* sourcePDFs;
-@property (nonatomic, strong) NSMutableDictionary* selectionViews;
-@property (nonatomic, strong) LJPDFSelections* pdfSelections;
+@property (nonatomic, weak) IBOutlet NSButton* addPageButton;
+@property (nonatomic, weak) IBOutlet NSButton* removePageButton;
+@property (nonatomic, weak) IBOutlet NSPanel* addPagePanel;
+@property (nonatomic, weak) IBOutlet NSButton* pageBackButton;
+@property (nonatomic, weak) IBOutlet NSButton* pageFwdButton;
+@property (nonatomic, weak) IBOutlet NSTextField* pageTextField;
+@property (nonatomic, weak) IBOutlet NSButton* zoomInButton;
+@property (nonatomic, weak) IBOutlet NSButton* zoomOutButton;
+@property (nonatomic, weak) IBOutlet NSButton* addTextButton;
+@property (nonatomic, weak) IBOutlet NSButton* addImageButton;
+@property (nonatomic, weak) IBOutlet NSButton* doPasteButton;
+@property (nonatomic, weak) IBOutlet RSPDFView* pdfView;
+
+@property (nonatomic, strong) RSDestinationPDF* destinationPDF;
 
 @end
 
@@ -40,8 +45,80 @@
 - (void)awakeFromNib;
 {
     [super awakeFromNib];
-    self.menuView.borderOptions = kLJBorderedViewBorderOptionsBottom;
     
+    [N_CENTER addObserverForName:kNotificationDestinationPDFDidUpdate
+                          object:nil
+                           queue:nil
+                      usingBlock:^(NSNotification *note) {
+                          //if ([self.sourcePDF url])
+                          //{
+                          //    self.pdfView.document = [[PDFDocument alloc] initWithURL:self.sourcePDF.url];
+                          //    self.sourcePDF.currentPage = 0;
+                          //    self.sourcePDF.currentScale = self.pdfView.scaleFactor;
+                          //}
+                          self.destinationPDF.currentPage = 0;
+                          self.destinationPDF.currentScale = self.pdfView.scaleFactor;
+                      }];
+    
+    [self.addPageButton setActionBlock:^{
+        [NSApp beginSheet:self.addPagePanel
+           modalForWindow:self.view.window
+            modalDelegate:self
+           didEndSelector:nil
+              contextInfo:nil];
+    }];
+    
+    [N_CENTER addObserverForName:kNotificationDestinationPDFPageDidUpdate
+                          object:nil
+                           queue:nil
+                      usingBlock:^(NSNotification *note) {
+                          [self.pdfView goToPage:[self.pdfView.document pageAtIndex:self.destinationPDF.currentPage]];
+                          self.pageBackButton.enabled = self.pdfView.canGoBack;
+                          self.pageFwdButton.enabled = self.pdfView.canGoForward;
+                          self.pageTextField.stringValue = [NSString stringWithFormat:@"%lu of %lu",
+                                                            (unsigned long)self.destinationPDF.currentPage + 1,
+                                                            (unsigned long)self.pdfView.document.pageCount];
+                          
+                          // new pages
+                      }];
+    
+    [self.pageBackButton setActionBlock:^{
+        if (self.pdfView.canGoBack) self.destinationPDF.currentPage = self.destinationPDF.currentPage - 1;
+    }];
+    
+    [self.pageFwdButton setActionBlock:^{
+        if (self.pdfView.canGoForward) self.destinationPDF.currentPage = self.destinationPDF.currentPage + 1;
+    }];
+    
+    [N_CENTER addObserverForName:kNotificationDestinationPDFZoomDidUpdate
+                          object:nil
+                           queue:nil
+                      usingBlock:^(NSNotification *note) {
+                          self.pdfView.scaleFactor = self.destinationPDF.currentScale;
+                          self.zoomOutButton.enabled = self.pdfView.canZoomOut;
+                          self.zoomInButton.enabled = self.pdfView.canZoomIn;
+                      }];
+    
+    [self.zoomOutButton setActionBlock:^{
+        if (self.pdfView.canZoomOut) self.destinationPDF.currentScale = self.destinationPDF.currentScale * 0.707;
+    }];
+    
+    [self.zoomInButton setActionBlock:^{
+        if (self.pdfView.canZoomIn) self.destinationPDF.currentScale = self.destinationPDF.currentScale * 1.414;
+    }];
+    
+    
+    
+    
+    self.pdfView.allowSelection = ^BOOL { return NO; };
+
+    
+    
+    self.destinationPDF = [RSDestinationPDF new];
+    
+    //self.menuView.borderOptions = kLJBorderedViewBorderOptionsBottom;
+    
+    /*
     NSArray* targetSizes = CONFIG_TARGET_SIZES;
     [self.selectSizePopup setItemTitles:[@[
                                            NSLocalizedString(@"Select Target Size", nil),
@@ -271,6 +348,7 @@
     self.destinationPDF = [LJDestinationPDF sharedInstance]; // TODO: Probably don't need a singleton here
     self.destinationPDF.sizeInInches = (CGSize){8.5, 11}; // TODO:
     self.destinationPDF.givesPointSizeFlipped = NO;
+     */
 }
 
 @end

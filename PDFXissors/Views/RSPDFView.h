@@ -8,6 +8,7 @@
 
 @interface RSPDFView : PDFView
 
+@property (nonatomic, copy) BOOL (^allowSelection)(void);
 @property (nonatomic, copy) BOOL (^allowNativeSelection)(void);
 @property (nonatomic, copy) void (^selectionRectDidUpdate)(CGRect);
 @property (nonatomic, copy) CGRect (^selectionRect)(void);

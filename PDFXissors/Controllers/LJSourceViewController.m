@@ -130,6 +130,8 @@
                           [self.pdfView setNeedsDisplay:YES];
                       }];
     
+    self.pdfView.allowSelection = ^BOOL { return YES; };
+    
     self.pdfView.allowNativeSelection = ^BOOL{
         return (self.sourcePDF.selectionType == kRSSourcePDFSelectionTypeText);
     };

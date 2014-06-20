@@ -11,9 +11,10 @@
 typedef NS_OPTIONS(NSInteger, kLJPopUpButtonOptions)
 {
     kLJPopUpButtonOptionsNone               = 0,
-    kLJPopUpButtonOptionsIgnoreSelection    = 1 << 1,
-    kLJPopUpButtonOptionsIgnoreFirstItem    = 1 << 2,
-    kLJPopUpButtonOptionsIgnoreForceFormat  = 1 << 3,
+    kLJPopUpButtonOptionsSelectFirstItem    = 1 << 1,
+    kLJPopUpButtonOptionsIgnoreSelection    = 1 << 2,
+    kLJPopUpButtonOptionsIgnoreFirstItem    = 1 << 3,
+    kLJPopUpButtonOptionsIgnoreForceFormat  = 1 << 4,
 };
 
 @interface NSPopUpButton (LJBlocks)

@@ -22,7 +22,9 @@ static NSString* const kNotificationSourcePDFSelectionTypeUpdate        = @"kNot
 static NSString* const kNotificationSourcePDFSelectionRectUpdate        = @"kNotificationSourcePDFSelectionRectUpdate";
 static NSString* const kNotificationSourcePDFCopyStateUpdate            = @"kNotificationSourcePDFCopyStateUpdate";
 
-//static NSString* const kNotificationDestinationPDFDidUpdate             = @"kNotificationDestinationPDFDidUpdate";
+static NSString* const kNotificationDestinationPDFDidUpdate             = @"kNotificationDestinationPDFDidUpdate";
+static NSString* const kNotificationDestinationPDFPageDidUpdate         = @"kNotificationDestinationPDFPageDidUpdate";
+static NSString* const kNotificationDestinationPDFZoomDidUpdate         = @"kNotificationDestinationPDFZoomDidUpdate";
 
 //static NSString* const kNotificationHideNonDrawingElements              = @"kNotificationHideNonDrawingElements";
 //static NSString* const kNotificationShowNonDrawingElements              = @"kNotificationShowNonDrawingElements";

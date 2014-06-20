@@ -66,6 +66,12 @@ static void* const kNSPopUpButton_LJBlocks_HelperKey = (void *)&kNSPopUpButton_L
     
     [self setAction:@selector(action:)];
     [self setTarget:helper];
+    
+    if (options & kLJPopUpButtonOptionsSelectFirstItem)
+    {
+        [self selectItemAtIndex:0];
+        [helper action:nil];
+    }
 }
 
 - (__NSPopUpButtonHelper *)lj_NSPopupButton_blocks_helper;

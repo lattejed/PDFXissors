@@ -12,9 +12,12 @@
 
 - (void)setCursorForAreaOfInterest:(PDFAreaOfInterest)area;
 {
-    if (self.allowNativeSelection())
+    if (self.allowSelection())
     {
-        [super setCursorForAreaOfInterest:area];
+        if (self.allowNativeSelection())
+        {
+            [super setCursorForAreaOfInterest:area];
+        }
     }
 }
 
@@ -30,19 +33,22 @@
 
 - (void)mouseDown:(NSEvent *)theEvent;
 {
-    if (self.allowNativeSelection())
+    if (self.allowSelection())
     {
-        [super mouseDown:theEvent];
-    }
-    else
-    {
-        CGPoint origin = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-        CGPoint origin2;
-        while ((theEvent = [[self window] nextEventMatchingMask:NSLeftMouseUpMask|NSLeftMouseDraggedMask]))
+        if (self.allowNativeSelection())
         {
-            origin2 = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-            self.selectionRectDidUpdate(CGPoints2Frame(origin, origin2));
-            if ([theEvent type] == NSLeftMouseUp) break;
+            [super mouseDown:theEvent];
+        }
+        else
+        {
+            CGPoint origin = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+            CGPoint origin2;
+            while ((theEvent = [[self window] nextEventMatchingMask:NSLeftMouseUpMask|NSLeftMouseDraggedMask]))
+            {
+                origin2 = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+                self.selectionRectDidUpdate(CGPoints2Frame(origin, origin2));
+                if ([theEvent type] == NSLeftMouseUp) break;
+            }
         }
     }
 }
@@ -50,13 +56,16 @@
 - (void)drawPage:(PDFPage *)page;
 {
     [super drawPage:page];
-    if (!self.allowNativeSelection())
+    if (self.allowSelection())
     {
-        NSBezierPath* selection = [NSBezierPath bezierPathWithRect:[self convertRect:self.selectionRect() toPage:page]];
-        CGFloat pattern[] = {12,12};
-        [selection setLineDash:pattern count:2 phase:0];
-        [[NSColor darkGrayColor] setStroke];
-        [selection stroke];
+        if (!self.allowNativeSelection())
+        {
+            NSBezierPath* selection = [NSBezierPath bezierPathWithRect:[self convertRect:self.selectionRect() toPage:page]];
+            CGFloat pattern[] = {12,12};
+            [selection setLineDash:pattern count:2 phase:0];
+            [[NSColor darkGrayColor] setStroke];
+            [selection stroke];
+        }
     }
 }
 
