@@ -5,6 +5,6 @@ DEPENDENCIES:
   - INAppStoreWindow (~> 1.4)
 
 SPEC CHECKSUMS:
-  INAppStoreWindow: 5a9eedcedc3ec95e7d8a12292de584b760d96c76
+  INAppStoreWindow: 570e4a9768aaac643ef2129d9b018aca2e0157b3
 
 COCOAPODS: 0.32.1

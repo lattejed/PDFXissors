@@ -12,10 +12,10 @@
 
 - (void)setCursorForAreaOfInterest:(PDFAreaOfInterest)area;
 {
-    // Prevent PDFView from overriding custom cursors in our selection rects
-    
-    // TODO: Check if we're using rectangular cursor or the standard (text, others?) cursor. Use a block or delegate method.
-    
+    if (self.allowNativeSelection())
+    {
+        [super setCursorForAreaOfInterest:area];
+    }
 }
 
 - (void)zoomIn:(id)sender;
@@ -30,13 +30,42 @@
 
 - (void)mouseDown:(NSEvent *)theEvent;
 {
-    // PDFView handles mouse events poorly, we need to consume this to receive mouseDragged: events
+    if (self.allowNativeSelection())
+    {
+        [super mouseDown:theEvent];
+    }
+    else
+    {
+        CGPoint origin = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+        CGPoint origin2;
+        while ((theEvent = [[self window] nextEventMatchingMask:NSLeftMouseUpMask|NSLeftMouseDraggedMask]))
+        {
+            origin2 = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+            self.selectionRectDidUpdate(CGPoints2Frame(origin, origin2));
+            if ([theEvent type] == NSLeftMouseUp) break;
+        }
+    }
 }
 
-- (void)mouseDragged:(NSEvent *)theEvent;
+- (void)drawPage:(PDFPage *)page;
 {
-    //CGPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    //if (self.addSelectionView) self.addSelectionView(point, theEvent);
+    [super drawPage:page];
+    if (!self.allowNativeSelection())
+    {
+        NSBezierPath* selection = [NSBezierPath bezierPathWithRect:[self convertRect:self.selectionRect() toPage:page]];
+        CGFloat pattern[] = {12,12};
+        [selection setLineDash:pattern count:2 phase:0];
+        [[NSColor darkGrayColor] setStroke];
+        [selection stroke];
+    }
 }
+
+/*
+- (void)drawPagePost:(PDFPage *)page;
+{
+    //[[NSColor redColor] setFill];
+    //NSRectFill(self.bounds);
+}
+*/
 
 @end

@@ -890,7 +890,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="292" height="449"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <subviews>
-                        <pdfView autoresizesSubviews="NO" wantsLayer="YES" id="rqa-Xo-fYR">
+                        <pdfView autoresizesSubviews="NO" wantsLayer="YES" id="rqa-Xo-fYR" customClass="RSPDFView">
                             <rect key="frame" x="10" y="10" width="282.5" height="429"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </pdfView>

@@ -10,6 +10,7 @@
 
     #import "Configuration.h"
     #import "Notifications.h"
+    #import "LJGeometryHelpers.h"
     #import "NSString+UUID.h"
     #import "NSPopUpButton+LJBlocks.h"
     #import "NSButton+LJBlocks.h"

@@ -10,12 +10,12 @@
 //#import "LJBorderedView.h"
 //#import "LJSourcePDFView.h"
 #import "RSSourcePDF.h"
-#import "RSPDFView.h"
 //#import "LJDestinationPDF.h"
 //#import "LJDragResizeView.h"
 //#import "LJContentViewWithCloseButton.h"
 //#import "LJPDFSelections.h"
 //#import "LJPDFSelection.h"
+
 
 @interface LJSourceViewController ()
 
@@ -28,7 +28,7 @@
 @property (nonatomic, weak) IBOutlet NSButton* rectSelectButton;
 @property (nonatomic, weak) IBOutlet NSButton* textSelectButton;
 @property (nonatomic, weak) IBOutlet NSButton* doCopyButton;
-@property (nonatomic, weak) IBOutlet RSPDFView* pdfView;
+@property (nonatomic, weak) IBOutlet PDFView* pdfView;
 
 //@property (nonatomic, weak) IBOutlet LJBorderedView* menuView;
 @property (nonatomic, strong) RSSourcePDF* sourcePDF;
@@ -111,55 +111,6 @@
     }];
     
     
-    [self.rectSelectButton setActionBlock:^{
-        self.rectSelectButton.state = NSOnState;
-        self.textSelectButton.state = NSOffState;
-        self.sourcePDF.selectionType = kRSSourcePDFSelectionTypeRectangle;
-    }];
-    
-    [self.textSelectButton setActionBlock:^{
-        self.textSelectButton.state = NSOnState;
-        self.rectSelectButton.state = NSOffState;
-        self.sourcePDF.selectionType = kRSSourcePDFSelectionTypeText;
-    }];
-    
-    [N_CENTER addObserverForName:kNotificationSourcePDFSelectionTypeUpdate
-                          object:nil
-                           queue:nil
-                      usingBlock:^(NSNotification *note) {
-                          [self.pdfView setNeedsDisplay:YES];
-                      }];
-    
-    self.pdfView.allowNativeSelection = ^BOOL{
-        return (self.sourcePDF.selectionType == kRSSourcePDFSelectionTypeText);
-    };
-    
-    self.pdfView.selectionRectDidUpdate = ^(CGRect rect) {
-        self.sourcePDF.currentSelection = rect;
-    };
-    
-    [N_CENTER addObserverForName:kNotificationSourcePDFSelectionRectUpdate
-                          object:nil
-                           queue:nil
-                      usingBlock:^(NSNotification *note) {
-                          [self.pdfView setNeedsDisplay:YES];
-                      }];
-    
-    self.pdfView.selectionRect = ^CGRect{
-        return self.sourcePDF.currentSelection;
-    };
-    
-    [self.doCopyButton setActionBlock:^{
-        //
-    }];
-    
-    [N_CENTER addObserverForName:kNotificationSourcePDFCopyStateUpdate
-                          object:nil
-                           queue:nil
-                      usingBlock:^(NSNotification *note) {
-                          self.doCopyButton.enabled = self.sourcePDF.canCopy;
-                      }];
-    
     /*
     [N_CENTER addObserverForName:NSWindowDidResizeNotification
                           object:nil
@@ -204,6 +155,7 @@
 #if DEV_LOAD_TEST_PDF
     self.sourcePDF = [RSSourcePDF new];
     self.sourcePDF.url = [M_BNDL URLForResource:@"pdf1" withExtension:@"pdf" subdirectory:@"Test"];
+    
 #endif
 }
 

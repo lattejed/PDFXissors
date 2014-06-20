@@ -31,4 +31,20 @@
                             object:self];
 }
 
+- (void)setSelectionType:(kRSSourcePDFSelectionType)selectionType;
+{
+    _selectionType = selectionType;
+    [N_CENTER postNotificationName:kNotificationSourcePDFSelectionTypeUpdate
+                            object:self];
+}
+
+- (void)setCurrentSelection:(CGRect)currentSelection;
+{
+    _currentSelection = currentSelection;
+    [N_CENTER postNotificationName:kNotificationSourcePDFSelectionRectUpdate
+                            object:self];
+}
+
+//@property (nonatomic, assign) BOOL canCopy;
+
 @end

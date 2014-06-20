@@ -18,6 +18,10 @@
 static NSString* const kNotificationSourcePDFDidUpdate                  = @"kNotificationSourcePDFDidUpdate";
 static NSString* const kNotificationSourcePDFPageDidUpdate              = @"kNotificationSourcePDFPageDidUpdate";
 static NSString* const kNotificationSourcePDFZoomDidUpdate              = @"kNotificationSourcePDFZoomDidUpdate";
+static NSString* const kNotificationSourcePDFSelectionTypeUpdate        = @"kNotificationSourcePDFSelectionTypeUpdate";
+static NSString* const kNotificationSourcePDFSelectionRectUpdate        = @"kNotificationSourcePDFSelectionRectUpdate";
+static NSString* const kNotificationSourcePDFCopyStateUpdate            = @"kNotificationSourcePDFCopyStateUpdate";
+
 //static NSString* const kNotificationDestinationPDFDidUpdate             = @"kNotificationDestinationPDFDidUpdate";
 
 //static NSString* const kNotificationHideNonDrawingElements              = @"kNotificationHideNonDrawingElements";

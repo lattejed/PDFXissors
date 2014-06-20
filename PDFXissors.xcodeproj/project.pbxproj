@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		340421FD195415EB00705BB1 /* LJPDFHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 340421FC195415EB00705BB1 /* LJPDFHelpers.m */; };
 		3406B3CB192350B80078D965 /* LJSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3406B3C519234F5A0078D965 /* LJSourceViewController.m */; };
 		3406B3D2192350F90078D965 /* NSPopUpButton+LJBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3406B3CD192350F90078D965 /* NSPopUpButton+LJBlocks.m */; };
 		3406B3D3192350F90078D965 /* NSButton+LJBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3406B3CF192350F90078D965 /* NSButton+LJBlocks.m */; };
@@ -14,6 +15,7 @@
 		3406B3D7192C933F0078D965 /* Test in Resources */ = {isa = PBXBuildFile; fileRef = 3406B3D6192C933F0078D965 /* Test */; };
 		3406B3DA192C93D10078D965 /* RSSourcePDF.m in Sources */ = {isa = PBXBuildFile; fileRef = 3406B3D9192C93D10078D965 /* RSSourcePDF.m */; };
 		3406B3DF192CAC980078D965 /* RSPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3406B3DE192CAC980078D965 /* RSPDFView.m */; };
+		34129454193894860043AA17 /* LJNotificationObservableModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 34129453193894860043AA17 /* LJNotificationObservableModel.m */; };
 		346AD6171918A1E900C18986 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 346AD6161918A1E900C18986 /* Cocoa.framework */; };
 		346AD6211918A1E900C18986 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 346AD61F1918A1E900C18986 /* InfoPlist.strings */; };
 		346AD6231918A1E900C18986 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 346AD6221918A1E900C18986 /* main.m */; };
@@ -54,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		340421FB195415EB00705BB1 /* LJPDFHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJPDFHelpers.h; sourceTree = "<group>"; };
+		340421FC195415EB00705BB1 /* LJPDFHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJPDFHelpers.m; sourceTree = "<group>"; };
 		3406B3C419234F5A0078D965 /* LJSourceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJSourceViewController.h; sourceTree = "<group>"; };
 		3406B3C519234F5A0078D965 /* LJSourceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJSourceViewController.m; sourceTree = "<group>"; };
 		3406B3C619234F5A0078D965 /* LJDestinationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJDestinationViewController.h; sourceTree = "<group>"; };
@@ -71,6 +75,9 @@
 		3406B3DC192C95DF0078D965 /* Configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
 		3406B3DD192CAC980078D965 /* RSPDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSPDFView.h; path = Views/RSPDFView.h; sourceTree = "<group>"; };
 		3406B3DE192CAC980078D965 /* RSPDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSPDFView.m; path = Views/RSPDFView.m; sourceTree = "<group>"; };
+		34129451193888FE0043AA17 /* LJGeometryHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LJGeometryHelpers.h; path = PDFXissors/Helpers/LJGeometryHelpers.h; sourceTree = SOURCE_ROOT; };
+		34129452193894860043AA17 /* LJNotificationObservableModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJNotificationObservableModel.h; sourceTree = "<group>"; };
+		34129453193894860043AA17 /* LJNotificationObservableModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJNotificationObservableModel.m; sourceTree = "<group>"; };
 		346AD6131918A1E900C18986 /* PDFXissors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PDFXissors.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		346AD6161918A1E900C18986 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		346AD6191918A1E900C18986 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -147,10 +154,22 @@
 		3406B3DB192C93D60078D965 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				34129452193894860043AA17 /* LJNotificationObservableModel.h */,
+				34129453193894860043AA17 /* LJNotificationObservableModel.m */,
 				3406B3D8192C93D10078D965 /* RSSourcePDF.h */,
 				3406B3D9192C93D10078D965 /* RSSourcePDF.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		34129450193888AD0043AA17 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				34129451193888FE0043AA17 /* LJGeometryHelpers.h */,
+				340421FB195415EB00705BB1 /* LJPDFHelpers.h */,
+				340421FC195415EB00705BB1 /* LJPDFHelpers.m */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		346AD60A1918A1E900C18986 = {
@@ -206,6 +225,7 @@
 				3406B3DB192C93D60078D965 /* Models */,
 				346AD64D1918B0DC00C18986 /* Views */,
 				3406B3CA19234F760078D965 /* Controllers */,
+				34129450193888AD0043AA17 /* Helpers */,
 				346AD61D1918A1E900C18986 /* Supporting Files */,
 			);
 			path = PDFXissors;
@@ -446,10 +466,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3406B3DA192C93D10078D965 /* RSSourcePDF.m in Sources */,
+				340421FD195415EB00705BB1 /* LJPDFHelpers.m in Sources */,
 				346AD6231918A1E900C18986 /* main.m in Sources */,
 				3406B3D4192350F90078D965 /* NSString+UUID.m in Sources */,
 				3406B3CB192350B80078D965 /* LJSourceViewController.m in Sources */,
 				346AD6501918E38000C18986 /* RSViewDrawBlock.m in Sources */,
+				34129454193894860043AA17 /* LJNotificationObservableModel.m in Sources */,
 				346AD62A1918A1E900C18986 /* RSAppDelegate.m in Sources */,
 				3406B3D3192350F90078D965 /* NSButton+LJBlocks.m in Sources */,
 				3406B3D2192350F90078D965 /* NSPopUpButton+LJBlocks.m in Sources */,
