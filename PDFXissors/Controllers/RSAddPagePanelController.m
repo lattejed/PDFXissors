@@ -62,6 +62,7 @@
             size = [targetSizes[idx] sizeValue];
         }
         close();
+        self.addPageForSize(size);
     }];
     
     [self.cancelButton setActionBlock:^{

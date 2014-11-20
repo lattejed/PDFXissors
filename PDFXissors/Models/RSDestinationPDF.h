@@ -10,10 +10,11 @@
 
 @interface RSDestinationPDF : NSObject
 
-@property (strong) PDFDocument* document;
+@property (strong, readonly) PDFDocument* document;
 @property (nonatomic, assign) NSUInteger currentPage;
 @property (nonatomic, assign) CGFloat currentScale;
 
-- (void)appendPage;
+- (void)addPageWithSize:(CGSize)size;
+- (void)removeCurrentPage;
 
 @end

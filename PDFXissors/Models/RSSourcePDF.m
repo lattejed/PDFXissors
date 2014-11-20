@@ -38,13 +38,31 @@
                             object:self];
 }
 
-- (void)setCurrentSelection:(CGRect)currentSelection;
+- (void)setCurrentSelectionRect:(CGRect)currentSelectionRect;
 {
-    _currentSelection = currentSelection;
+    _currentSelectionRect = currentSelectionRect;
     [N_CENTER postNotificationName:kNotificationSourcePDFSelectionRectUpdate
                             object:self];
 }
 
-//@property (nonatomic, assign) BOOL canCopy;
+- (void)setCurrentSelectionString:(NSAttributedString *)currentSelectionString;
+{
+    _currentSelectionString = currentSelectionString;
+    [N_CENTER postNotificationName:kNotificationSourcePDFSelectionStringUpdate
+                            object:self];
+}
+
+- (BOOL)canCopy;
+{
+    if (self.selectionType == kRSSourcePDFSelectionTypeRectangle)
+    {
+        return self.currentSelectionRect.size.width > 0 && self.currentSelectionRect.size.height > 0;
+    }
+    else if (self.selectionType == kRSSourcePDFSelectionTypeText)
+    {
+        return self.currentSelectionString != nil;
+    }
+    return NO;
+}
 
 @end

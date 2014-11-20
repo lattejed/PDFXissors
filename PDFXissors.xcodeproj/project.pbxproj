@@ -12,6 +12,7 @@
 		3404220119541B4F00705BB1 /* LJDestinationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3406B3C719234F5A0078D965 /* LJDestinationViewController.m */; };
 		3404220719542A3500705BB1 /* RSAddPagePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3404220619542A3500705BB1 /* RSAddPagePanelController.m */; };
 		34042209195437FB00705BB1 /* doc_minus_icon&16.png in Resources */ = {isa = PBXBuildFile; fileRef = 34042208195437FB00705BB1 /* doc_minus_icon&16.png */; };
+		3404220C19544A7400705BB1 /* NSImage+LJBlankImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3404220B19544A7400705BB1 /* NSImage+LJBlankImage.m */; };
 		3406B3CB192350B80078D965 /* LJSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3406B3C519234F5A0078D965 /* LJSourceViewController.m */; };
 		3406B3D2192350F90078D965 /* NSPopUpButton+LJBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3406B3CD192350F90078D965 /* NSPopUpButton+LJBlocks.m */; };
 		3406B3D3192350F90078D965 /* NSButton+LJBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3406B3CF192350F90078D965 /* NSButton+LJBlocks.m */; };
@@ -45,6 +46,9 @@
 		346AD68A191A10F500C18986 /* text_letter_t_icon&16.png in Resources */ = {isa = PBXBuildFile; fileRef = 346AD67E191A10F500C18986 /* text_letter_t_icon&16.png */; };
 		346AD68C191A164F00C18986 /* doc_plus_icon&16.png in Resources */ = {isa = PBXBuildFile; fileRef = 346AD68B191A164F00C18986 /* doc_plus_icon&16.png */; };
 		346AD68E191A1AAC00C18986 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 346AD68D191A1AAC00C18986 /* Quartz.framework */; };
+		348EDB361A1C61D6009C24DD /* LJPDFSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 348EDB331A1C61D6009C24DD /* LJPDFSelection.m */; };
+		348EDB371A1C61D6009C24DD /* LJPDFSelections.m in Sources */ = {isa = PBXBuildFile; fileRef = 348EDB351A1C61D6009C24DD /* LJPDFSelections.m */; };
+		348EDB521A1D9F79009C24DD /* LJResizableDraggableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 348EDB511A1D9F79009C24DD /* LJResizableDraggableView.m */; };
 		DB88401D1F5B47D9B1E1683C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B78ABA448BF464B86D9456D /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +70,8 @@
 		3404220519542A3500705BB1 /* RSAddPagePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSAddPagePanelController.h; sourceTree = "<group>"; };
 		3404220619542A3500705BB1 /* RSAddPagePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSAddPagePanelController.m; sourceTree = "<group>"; };
 		34042208195437FB00705BB1 /* doc_minus_icon&16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "doc_minus_icon&16.png"; path = "Assets/Buttons/doc_minus_icon&16.png"; sourceTree = "<group>"; };
+		3404220A19544A7400705BB1 /* NSImage+LJBlankImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+LJBlankImage.h"; sourceTree = "<group>"; };
+		3404220B19544A7400705BB1 /* NSImage+LJBlankImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+LJBlankImage.m"; sourceTree = "<group>"; };
 		3406B3C419234F5A0078D965 /* LJSourceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJSourceViewController.h; sourceTree = "<group>"; };
 		3406B3C519234F5A0078D965 /* LJSourceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJSourceViewController.m; sourceTree = "<group>"; };
 		3406B3C619234F5A0078D965 /* LJDestinationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJDestinationViewController.h; sourceTree = "<group>"; };
@@ -119,6 +125,12 @@
 		346AD67E191A10F500C18986 /* text_letter_t_icon&16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "text_letter_t_icon&16.png"; path = "Assets/Buttons/text_letter_t_icon&16.png"; sourceTree = "<group>"; };
 		346AD68B191A164F00C18986 /* doc_plus_icon&16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "doc_plus_icon&16.png"; path = "Assets/Buttons/doc_plus_icon&16.png"; sourceTree = "<group>"; };
 		346AD68D191A1AAC00C18986 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		348EDB321A1C61D6009C24DD /* LJPDFSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJPDFSelection.h; sourceTree = "<group>"; };
+		348EDB331A1C61D6009C24DD /* LJPDFSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJPDFSelection.m; sourceTree = "<group>"; };
+		348EDB341A1C61D6009C24DD /* LJPDFSelections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJPDFSelections.h; sourceTree = "<group>"; };
+		348EDB351A1C61D6009C24DD /* LJPDFSelections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJPDFSelections.m; sourceTree = "<group>"; };
+		348EDB501A1D9F79009C24DD /* LJResizableDraggableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LJResizableDraggableView.h; path = Views/LJResizableDraggableView.h; sourceTree = "<group>"; };
+		348EDB511A1D9F79009C24DD /* LJResizableDraggableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LJResizableDraggableView.m; path = Views/LJResizableDraggableView.m; sourceTree = "<group>"; };
 		3B78ABA448BF464B86D9456D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD7C83E203B04AAE9DB41819 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -166,6 +178,10 @@
 				3406B3D9192C93D10078D965 /* RSSourcePDF.m */,
 				340421FE1954168D00705BB1 /* RSDestinationPDF.h */,
 				340421FF1954168D00705BB1 /* RSDestinationPDF.m */,
+				348EDB321A1C61D6009C24DD /* LJPDFSelection.h */,
+				348EDB331A1C61D6009C24DD /* LJPDFSelection.m */,
+				348EDB341A1C61D6009C24DD /* LJPDFSelections.h */,
+				348EDB351A1C61D6009C24DD /* LJPDFSelections.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -280,6 +296,8 @@
 				346AD64F1918E38000C18986 /* RSViewDrawBlock.m */,
 				3406B3DD192CAC980078D965 /* RSPDFView.h */,
 				3406B3DE192CAC980078D965 /* RSPDFView.m */,
+				348EDB501A1D9F79009C24DD /* LJResizableDraggableView.h */,
+				348EDB511A1D9F79009C24DD /* LJResizableDraggableView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -322,6 +340,8 @@
 				3406B3CF192350F90078D965 /* NSButton+LJBlocks.m */,
 				3406B3D0192350F90078D965 /* NSString+UUID.h */,
 				3406B3D1192350F90078D965 /* NSString+UUID.m */,
+				3404220A19544A7400705BB1 /* NSImage+LJBlankImage.h */,
+				3404220B19544A7400705BB1 /* NSImage+LJBlankImage.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -480,10 +500,14 @@
 				346AD6231918A1E900C18986 /* main.m in Sources */,
 				3404220719542A3500705BB1 /* RSAddPagePanelController.m in Sources */,
 				3404220119541B4F00705BB1 /* LJDestinationViewController.m in Sources */,
+				348EDB371A1C61D6009C24DD /* LJPDFSelections.m in Sources */,
+				348EDB361A1C61D6009C24DD /* LJPDFSelection.m in Sources */,
+				3404220C19544A7400705BB1 /* NSImage+LJBlankImage.m in Sources */,
 				3406B3D4192350F90078D965 /* NSString+UUID.m in Sources */,
 				3406B3CB192350B80078D965 /* LJSourceViewController.m in Sources */,
 				346AD6501918E38000C18986 /* RSViewDrawBlock.m in Sources */,
 				346AD62A1918A1E900C18986 /* RSAppDelegate.m in Sources */,
+				348EDB521A1D9F79009C24DD /* LJResizableDraggableView.m in Sources */,
 				340422001954168D00705BB1 /* RSDestinationPDF.m in Sources */,
 				3406B3D3192350F90078D965 /* NSButton+LJBlocks.m in Sources */,
 				3406B3D2192350F90078D965 /* NSPopUpButton+LJBlocks.m in Sources */,

@@ -14,4 +14,5 @@
     #import "NSString+UUID.h"
     #import "NSPopUpButton+LJBlocks.h"
     #import "NSButton+LJBlocks.h"
+    #import "NSImage+LJBlankImage.h"
 #endif

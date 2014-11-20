@@ -14,7 +14,7 @@
 //#import "LJDestinationPDF.h"
 //#import "LJDragResizeView.h"
 //#import "LJContentViewWithCloseButton.h"
-//#import "LJPDFSelections.h"
+#import "LJPDFSelections.h"
 //#import "LJPDFSelection.h"
 
 @interface LJSourceViewController ()
@@ -32,7 +32,7 @@
 
 //@property (nonatomic, weak) IBOutlet LJBorderedView* menuView;
 @property (nonatomic, strong) RSSourcePDF* sourcePDF;
-//@property (nonatomic, strong) LJPDFSelections* pdfSelections;
+@property (nonatomic, strong) LJPDFSelections* pdfSelections;
 //@property (nonatomic, strong) NSMutableDictionary* selectionViews;
 
 @end
@@ -68,8 +68,10 @@
                           if ([self.sourcePDF url])
                           {
                               self.pdfView.document = [[PDFDocument alloc] initWithURL:self.sourcePDF.url];
-                              self.sourcePDF.currentPage = 0;
+                              self.sourcePDF.currentPage = 0; // TODO: Wrap these into an init?
                               self.sourcePDF.currentScale = self.pdfView.scaleFactor;
+                              self.sourcePDF.currentSelectionRect = CGRectZero;
+                              self.sourcePDF.currentSelectionString = nil;
                           }
                       }];
     
@@ -137,7 +139,7 @@
     };
     
     self.pdfView.selectionRectDidUpdate = ^(CGRect rect) {
-        self.sourcePDF.currentSelection = rect;
+        self.sourcePDF.currentSelectionRect = rect;
     };
     
     [N_CENTER addObserverForName:kNotificationSourcePDFSelectionRectUpdate
@@ -145,14 +147,36 @@
                            queue:nil
                       usingBlock:^(NSNotification *note) {
                           [self.pdfView setNeedsDisplay:YES];
+                          self.doCopyButton.enabled = [self.sourcePDF canCopy];
                       }];
     
     self.pdfView.selectionRect = ^CGRect{
-        return self.sourcePDF.currentSelection;
+        return self.sourcePDF.currentSelectionRect;
     };
     
+    self.pdfView.selectionStringDidUpdate = ^(NSAttributedString* string) {
+        self.sourcePDF.currentSelectionString = string;
+    };
+    
+    [N_CENTER addObserverForName:kNotificationSourcePDFSelectionStringUpdate
+                          object:nil
+                           queue:nil
+                      usingBlock:^(NSNotification *note) {
+                          self.doCopyButton.enabled = [self.sourcePDF canCopy];
+                      }];
+    
     [self.doCopyButton setActionBlock:^{
-        //
+        if (self.sourcePDF.selectionType == kRSSourcePDFSelectionTypeRectangle)
+        {
+            NSString* uuid = [NSString UUID]; // TODO:
+            CGRect srcRect = [self.pdfView convertRect:self.sourcePDF.currentSelectionRect toPage:self.pdfView.currentPage]; // TODO: selection?
+            [self.pdfSelections setTemporarySelectionWithSrcRect:srcRect forSelectionID:uuid];
+        }
+        else if (self.sourcePDF.selectionType == kRSSourcePDFSelectionTypeText)
+        {
+            NSString* uuid = [NSString UUID]; // TODO:
+            [self.pdfSelections setTemporarySelectionWithString:self.sourcePDF.currentSelectionString forSelectionID:uuid];
+        }
     }];
     
     [N_CENTER addObserverForName:kNotificationSourcePDFCopyStateUpdate
@@ -201,7 +225,7 @@
     };*/
     
     //self.sourcePDF = [RSSourcePDF new];
-    //self.pdfSelections = [LJPDFSelections sharedInstance];
+    self.pdfSelections = [LJPDFSelections sharedInstance];
 
 #if DEV_LOAD_TEST_PDF
     self.sourcePDF = [RSSourcePDF new];

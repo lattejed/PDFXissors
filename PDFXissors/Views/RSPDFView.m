@@ -53,6 +53,14 @@
     }
 }
 
+- (void)mouseUp:(NSEvent *)theEvent;
+{
+    [super mouseUp:theEvent];
+    if (self.allowSelection() && self.allowNativeSelection()) {
+        self.selectionStringDidUpdate(self.currentSelection.attributedString);
+    }
+}
+
 - (void)drawPage:(PDFPage *)page;
 {
     [super drawPage:page];

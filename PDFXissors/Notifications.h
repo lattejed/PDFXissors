@@ -9,20 +9,22 @@
 #ifndef PDFXissors_Notifications_h
 #define PDFXissors_Notifications_h
 
-//static NSString* const kNotificationPDFSelectionAdd                     = @"kNotificationPDFSelectionAdd";
-//static NSString* const kNotificationPDFSelectionSrcUpdate               = @"kNotificationPDFSelectionSrcUpdate";
-//static NSString* const kNotificationPDFSelectionDstUpdate               = @"kNotificationPDFSelectionDstUpdate";
-//static NSString* const kNotificationPDFSelectionRemove                  = @"kNotificationPDFSelectionRemove";
-//static NSString* const kNotificationPDFSelectionObjectKey               = @"kNotificationPDFSelectionObjectKey";
+static NSString* const kNotificationPDFSelectionTempUpdate              = @"kNotificationPDFSelectionTempUpdate";
+static NSString* const kNotificationPDFSelectionAdd                     = @"kNotificationPDFSelectionAdd";
+static NSString* const kNotificationPDFSelectionSrcUpdate               = @"kNotificationPDFSelectionSrcUpdate";
+static NSString* const kNotificationPDFSelectionDstUpdate               = @"kNotificationPDFSelectionDstUpdate";
+static NSString* const kNotificationPDFSelectionRemove                  = @"kNotificationPDFSelectionRemove";
+static NSString* const kNotificationPDFSelectionObjectKey               = @"kNotificationPDFSelectionObjectKey";
 
 static NSString* const kNotificationSourcePDFDidUpdate                  = @"kNotificationSourcePDFDidUpdate";
 static NSString* const kNotificationSourcePDFPageDidUpdate              = @"kNotificationSourcePDFPageDidUpdate";
 static NSString* const kNotificationSourcePDFZoomDidUpdate              = @"kNotificationSourcePDFZoomDidUpdate";
 static NSString* const kNotificationSourcePDFSelectionTypeUpdate        = @"kNotificationSourcePDFSelectionTypeUpdate";
 static NSString* const kNotificationSourcePDFSelectionRectUpdate        = @"kNotificationSourcePDFSelectionRectUpdate";
+static NSString* const kNotificationSourcePDFSelectionStringUpdate      = @"kNotificationSourcePDFSelectionStringUpdate";
 static NSString* const kNotificationSourcePDFCopyStateUpdate            = @"kNotificationSourcePDFCopyStateUpdate";
 
-static NSString* const kNotificationDestinationPDFDidUpdate             = @"kNotificationDestinationPDFDidUpdate";
+//static NSString* const kNotificationDestinationPDFDidUpdate             = @"kNotificationDestinationPDFDidUpdate";
 static NSString* const kNotificationDestinationPDFPageDidUpdate         = @"kNotificationDestinationPDFPageDidUpdate";
 static NSString* const kNotificationDestinationPDFZoomDidUpdate         = @"kNotificationDestinationPDFZoomDidUpdate";
 

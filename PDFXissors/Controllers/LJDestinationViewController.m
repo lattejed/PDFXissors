@@ -11,6 +11,7 @@
 //#import "LJBorderedView.h"
 #import "RSPDFView.h"
 #import "RSDestinationPDF.h"
+#import "RSAddPagePanelController.h"
 //#import "LJDestinationView.h"
 //#import "LJDestinationPDF.h"
 //#import "LJSourcePDFs.h"
@@ -46,19 +47,15 @@
 {
     [super awakeFromNib];
     
+    /*
     [N_CENTER addObserverForName:kNotificationDestinationPDFDidUpdate
                           object:nil
                            queue:nil
                       usingBlock:^(NSNotification *note) {
-                          //if ([self.sourcePDF url])
-                          //{
-                          //    self.pdfView.document = [[PDFDocument alloc] initWithURL:self.sourcePDF.url];
-                          //    self.sourcePDF.currentPage = 0;
-                          //    self.sourcePDF.currentScale = self.pdfView.scaleFactor;
-                          //}
-                          self.destinationPDF.currentPage = 0;
-                          self.destinationPDF.currentScale = self.pdfView.scaleFactor;
-                      }];
+                          //self.destinationPDF.currentPage = 0;
+                          //self.destinationPDF.currentScale = self.pdfView.scaleFactor;
+                          self.pdfView.document = self.destinationPDF.document;
+                      }];*/
     
     [self.addPageButton setActionBlock:^{
         [NSApp beginSheet:self.addPagePanel
@@ -68,18 +65,26 @@
               contextInfo:nil];
     }];
     
+    RSAddPagePanelController* panelController = [self.addPagePanel windowController];
+    panelController.addPageForSize = ^(CGSize size) {
+        [self.destinationPDF addPageWithSize:size];
+    };
+    
+    [self.removePageButton setActionBlock:^{
+        [self.destinationPDF removeCurrentPage];
+    }];
+    
     [N_CENTER addObserverForName:kNotificationDestinationPDFPageDidUpdate
                           object:nil
                            queue:nil
                       usingBlock:^(NSNotification *note) {
+                          if (!self.pdfView.document) self.pdfView.document = self.destinationPDF.document;
                           [self.pdfView goToPage:[self.pdfView.document pageAtIndex:self.destinationPDF.currentPage]];
                           self.pageBackButton.enabled = self.pdfView.canGoBack;
                           self.pageFwdButton.enabled = self.pdfView.canGoForward;
                           self.pageTextField.stringValue = [NSString stringWithFormat:@"%lu of %lu",
                                                             (unsigned long)self.destinationPDF.currentPage + 1,
                                                             (unsigned long)self.pdfView.document.pageCount];
-                          
-                          // new pages
                       }];
     
     [self.pageBackButton setActionBlock:^{
@@ -106,14 +111,12 @@
     [self.zoomInButton setActionBlock:^{
         if (self.pdfView.canZoomIn) self.destinationPDF.currentScale = self.destinationPDF.currentScale * 1.414;
     }];
-    
-    
-    
+
+    [self.doPasteButton setActionBlock:^{
+        // create a dst object in a default location, pull from _Selections
+    }];
     
     self.pdfView.allowSelection = ^BOOL { return NO; };
-
-    
-    
     self.destinationPDF = [RSDestinationPDF new];
     
     //self.menuView.borderOptions = kLJBorderedViewBorderOptionsBottom;

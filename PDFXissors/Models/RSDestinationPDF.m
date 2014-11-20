@@ -10,18 +10,6 @@
 
 @implementation RSDestinationPDF
 
-- (id)init;
-{
-    if (self = [super init])
-    {
-        self.document = [[PDFDocument alloc] init];
-        [N_CENTER postNotificationName:kNotificationDestinationPDFDidUpdate
-                                object:self];
-        [self appendPage];
-    }
-    return self;
-}
-
 - (void)setCurrentPage:(NSUInteger)currentPage;
 {
     _currentPage = currentPage;
@@ -36,10 +24,28 @@
                             object:self];
 }
 
-- (void)appendPage;
+- (void)addPageWithSize:(CGSize)size;
 {
-    PDFPage* page = [[PDFPage alloc] init]; // TODO:
-    [self.document insertPage:page atIndex:[self.document pageCount]];
+    CGSize pointSize = (CGSize){size.width * 72, size.height * 72};
+    NSImage* image = [NSImage blankImageWithSize:pointSize];
+    PDFPage* page = [[PDFPage alloc] initWithImage:image];
+    [page setBounds:(CGRect){0,0,pointSize} forBox:kPDFDisplayBoxArtBox];
+    if (!_document)
+    {
+        _document = [PDFDocument new];
+        [_document insertPage:page atIndex:0];
+    }
+    else
+    {
+        [_document insertPage:page atIndex:_currentPage + 1];
+    }
+    [N_CENTER postNotificationName:kNotificationDestinationPDFPageDidUpdate
+                            object:self];
+}
+
+- (void)removeCurrentPage;
+{
+    [self.document removePageAtIndex:_currentPage];
     [N_CENTER postNotificationName:kNotificationDestinationPDFPageDidUpdate
                             object:self];
 }

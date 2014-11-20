@@ -1,5 +1,5 @@
 //
-//  RSAddPagePanelController.h
+//  NSImage+LJBlankImage.h
 //  PDFXissors
 //
 //  Created by Matthew Smith on 6/20/14.
@@ -8,8 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface RSAddPagePanelController : NSWindowController
+@interface NSImage (LJBlankImage)
 
-@property (nonatomic, copy) void (^addPageForSize)(CGSize);
++ (instancetype)blankImageWithSize:(CGSize)size;
 
 @end
