@@ -17,10 +17,13 @@
 //#import "LJSourcePDFs.h"
 //#import "LJDragResizeView.h"
 //#import "LJDestinationSelectionView.h"
-//#import "LJPDFSelection.h"
-//#import "LJPDFClipView.h"
-//#import "LJPDFSelections.h"
+#import "LJPDFSelection.h"
+#import "LJPDFClipView.h"
+#import "LJPDFSelections.h"
 //#import "LJContentViewWithCloseButton.h"
+#import "LJResizableDraggableView.h"
+#import "RSTextView.h"
+#import "RSImageView.h"
 
 @interface LJDestinationViewController ()
 
@@ -36,8 +39,8 @@
 @property (nonatomic, weak) IBOutlet NSButton* addImageButton;
 @property (nonatomic, weak) IBOutlet NSButton* doPasteButton;
 @property (nonatomic, weak) IBOutlet RSPDFView* pdfView;
-
 @property (nonatomic, strong) RSDestinationPDF* destinationPDF;
+@property (nonatomic, strong) LJPDFSelections* pdfSelections;
 
 @end
 
@@ -47,15 +50,9 @@
 {
     [super awakeFromNib];
     
-    /*
-    [N_CENTER addObserverForName:kNotificationDestinationPDFDidUpdate
-                          object:nil
-                           queue:nil
-                      usingBlock:^(NSNotification *note) {
-                          //self.destinationPDF.currentPage = 0;
-                          //self.destinationPDF.currentScale = self.pdfView.scaleFactor;
-                          self.pdfView.document = self.destinationPDF.document;
-                      }];*/
+    self.doPasteButton.enabled = false;
+    self.addImageButton.enabled = false;
+    self.addTextButton.enabled = false;
     
     [self.addPageButton setActionBlock:^{
         [NSApp beginSheet:self.addPagePanel
@@ -80,11 +77,17 @@
                       usingBlock:^(NSNotification *note) {
                           if (!self.pdfView.document) self.pdfView.document = self.destinationPDF.document;
                           [self.pdfView goToPage:[self.pdfView.document pageAtIndex:self.destinationPDF.currentPage]];
+                          
                           self.pageBackButton.enabled = self.pdfView.canGoBack;
                           self.pageFwdButton.enabled = self.pdfView.canGoForward;
                           self.pageTextField.stringValue = [NSString stringWithFormat:@"%lu of %lu",
                                                             (unsigned long)self.destinationPDF.currentPage + 1,
                                                             (unsigned long)self.pdfView.document.pageCount];
+                          
+                          BOOL canPaste = [self.destinationPDF canPaste];
+                          self.doPasteButton.enabled = canPaste && [self.pdfSelections canPaste];
+                          self.addImageButton.enabled = canPaste;
+                          self.addTextButton.enabled = canPaste;
                       }];
     
     [self.pageBackButton setActionBlock:^{
@@ -111,12 +114,84 @@
     [self.zoomInButton setActionBlock:^{
         if (self.pdfView.canZoomIn) self.destinationPDF.currentScale = self.destinationPDF.currentScale * 1.414;
     }];
+    
+    [N_CENTER addObserverForName:kNotificationPDFSelectionTempUpdate
+                          object:nil
+                           queue:nil
+                      usingBlock:^(NSNotification *note) {
+                          self.doPasteButton.enabled = [self.destinationPDF canPaste] && [self.pdfSelections canPaste];
+                      }];
 
     [self.doPasteButton setActionBlock:^{
-        // create a dst object in a default location, pull from _Selections
+        [self.pdfSelections promoteTemporarySelection];
     }];
     
+    [self.addTextButton setActionBlock:^{
+        
+        //NSString* uuid = [NSString UUID];
+        //[self.pdfSelections add]
+    }];
+    
+    [self.addImageButton setActionBlock:^{
+        NSOpenPanel* panel = [NSOpenPanel openPanel];
+        [panel setCanChooseFiles:YES];
+        [panel setCanChooseDirectories:NO];
+        [panel setAllowsMultipleSelection:NO];
+        [panel setTitle:NSLocalizedString(@"Select Image", nil)];
+        [panel setAllowedFileTypes:@[(__bridge NSString *)kUTTypeImage]];
+        [panel beginSheetModalForWindow:[[self view] window]
+                      completionHandler:^(NSInteger result) {
+                          if (result == NSFileHandlingPanelOKButton) {
+                              NSURL* url = [[panel URLs] firstObject];
+                              NSImage* image = [[NSImage alloc] initWithContentsOfURL:url];
+                              if (image != nil) {
+                                  NSString* uuid = [NSString UUID];
+                                  [self.pdfSelections addSelectionWithImage:image forSelectionID:uuid];
+                              }
+                          }
+                      }];
+    }];
+    
+    [N_CENTER addObserverForName:kNotificationPDFSelectionAdd
+                          object:nil
+                           queue:nil
+                      usingBlock:^(NSNotification *note) {
+                          LJPDFSelection* selection = [[note userInfo] objectForKey:kNotificationPDFSelectionObjectKey];
+                          LJResizableDraggableView* controlView = nil;
+                          if (selection.type == kLJPDFSelectionTypeString) {
+                              
+                              // TODO: We don't know how this will draw to the final page
+                              controlView = [[LJResizableDraggableView alloc] initWithFrame:CGRectMake(50, 50, 200, 200)]; // TODO:
+                              RSTextView* textView = [[RSTextView alloc] initWithFrame:controlView.contentViewFrame];
+                              [[textView textStorage] setAttributedString:selection.string];
+                              [controlView setContentView:textView];
+                              [self.pdfView addSubview:controlView];
+                          } else if (selection.type == kLJPDFSelectionTypePDF) {
+                              
+                              // TODO:
+
+                          } else if (selection.type == kLJPDFSelectionTypeImage) {
+                              
+                              CGRect frame = [LJResizableDraggableView initialFrameForParentView:self.pdfView size:selection.image.size preserveAspect:YES];
+                              controlView = [[LJResizableDraggableView alloc] initWithFrame:frame];
+                              RSImageView* imageView = [[RSImageView alloc] initWithFrame:controlView.contentViewFrame];
+                              imageView.image = selection.image;
+                              [controlView setContentView:imageView];
+                              [self.pdfView addSubview:controlView];
+                          }
+                          if (controlView != nil) {
+                              controlView.viewDidClose = ^(NSView* view){
+                                  [view removeFromSuperview];
+                                  [self.pdfSelections removeSelectionForSelectionID:selection.ID];
+                              };
+                              controlView.contentViewFrameUpdate = ^(NSView* view, CGRect rect){
+                                  [self.pdfSelections updateSelectionSrcRect:rect forSelectionID:selection.ID];
+                              };
+                          }
+                      }];
+    
     self.pdfView.allowSelection = ^BOOL { return NO; };
+    self.pdfSelections = [LJPDFSelections sharedInstance];
     self.destinationPDF = [RSDestinationPDF new];
     
     //self.menuView.borderOptions = kLJBorderedViewBorderOptionsBottom;

@@ -16,5 +16,6 @@
 
 - (void)addPageWithSize:(CGSize)size;
 - (void)removeCurrentPage;
+- (BOOL)canPaste;
 
 @end

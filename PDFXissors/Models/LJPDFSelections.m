@@ -10,7 +10,7 @@
 
 @interface LJPDFSelections ()
 
-@property (nonatomic, strong) NSMutableDictionary* selectionRects;
+@property (nonatomic, strong) NSMutableDictionary* __selections;
 @property (nonatomic, strong) LJPDFSelection* temporarySelection;
 
 @end
@@ -30,7 +30,7 @@
 - (void)setTemporarySelectionWithSrcRect:(CGRect)srcRect forSelectionID:(NSString *)UUID;
 {
     LJPDFSelection* selection = [LJPDFSelection new];
-    selection.isRect = YES;
+    selection.type = kLJPDFSelectionTypePDF;
     selection.ID = UUID;
     selection.srcRect = srcRect;
     self.temporarySelection = selection;
@@ -42,7 +42,7 @@
 - (void)setTemporarySelectionWithString:(NSAttributedString *)string forSelectionID:(NSString *)UUID;
 {
     LJPDFSelection* selection = [LJPDFSelection new];
-    selection.isString = YES;
+    selection.type = kLJPDFSelectionTypeString;
     selection.ID = UUID;
     selection.string = string;
     self.temporarySelection = selection;
@@ -51,12 +51,41 @@
                           userInfo:@{kNotificationPDFSelectionObjectKey: selection}];
 }
 
-- (void)addSelectionWithID:(NSString *)UUID;
+- (void)promoteTemporarySelection;
 {
-    if (!self.selectionRects) self.selectionRects = [NSMutableDictionary dictionary];
+    [self addSelection:self.temporarySelection forSelectionID:self.temporarySelection.ID];
+}
+
+- (void)addSelectionWithString:(NSAttributedString *)string forSelectionID:(NSString *)UUID;
+{
+    if (!self.__selections) self.__selections = [NSMutableDictionary dictionary];
     LJPDFSelection* selection = [LJPDFSelection new];
+    selection.type = kLJPDFSelectionTypeString;
     selection.ID = UUID;
-    [self.selectionRects setObject:selection forKey:UUID];
+    selection.string = string;
+    [self.__selections setObject:selection forKey:UUID];
+    [N_CENTER postNotificationName:kNotificationPDFSelectionAdd
+                            object:self
+                          userInfo:@{kNotificationPDFSelectionObjectKey: selection}];
+}
+
+- (void)addSelectionWithImage:(NSImage *)image forSelectionID:(NSString *)UUID;
+{
+    if (!self.__selections) self.__selections = [NSMutableDictionary dictionary];
+    LJPDFSelection* selection = [LJPDFSelection new];
+    selection.type = kLJPDFSelectionTypeImage;
+    selection.ID = UUID;
+    selection.image = image;
+    [self.__selections setObject:selection forKey:UUID];
+    [N_CENTER postNotificationName:kNotificationPDFSelectionAdd
+                            object:self
+                          userInfo:@{kNotificationPDFSelectionObjectKey: selection}];
+}
+
+- (void)addSelection:(LJPDFSelection *)selection forSelectionID:(NSString *)UUID;
+{
+    if (!self.__selections) self.__selections = [NSMutableDictionary dictionary];
+    [self.__selections setObject:selection forKey:UUID];
     [N_CENTER postNotificationName:kNotificationPDFSelectionAdd
                             object:self
                           userInfo:@{kNotificationPDFSelectionObjectKey: selection}];
@@ -64,7 +93,7 @@
 
 - (void)updateSelectionSrcRect:(CGRect)srcRect forSelectionID:(NSString *)UUID;
 {
-    LJPDFSelection* selection = [self.selectionRects objectForKey:UUID];
+    LJPDFSelection* selection = [self.__selections objectForKey:UUID];
     selection.srcRect = srcRect;
     [N_CENTER postNotificationName:kNotificationPDFSelectionSrcUpdate
                             object:self
@@ -73,7 +102,7 @@
 
 - (void)updateSelectionDstRect:(CGRect)dstRect forSelectionID:(NSString *)UUID;
 {
-    LJPDFSelection* selection = [self.selectionRects objectForKey:UUID];
+    LJPDFSelection* selection = [self.__selections objectForKey:UUID];
     selection.dstRect = dstRect;
     [N_CENTER postNotificationName:kNotificationPDFSelectionDstUpdate
                             object:self
@@ -82,8 +111,8 @@
 
 - (void)removeSelectionForSelectionID:(NSString *)UUID;
 {
-    LJPDFSelection* selection = [self.selectionRects objectForKey:UUID];
-    [self.selectionRects removeObjectForKey:UUID];
+    LJPDFSelection* selection = [self.__selections objectForKey:UUID];
+    [self.__selections removeObjectForKey:UUID];
     [N_CENTER postNotificationName:kNotificationPDFSelectionRemove
                             object:self
                           userInfo:@{kNotificationPDFSelectionObjectKey: selection}];
@@ -91,7 +120,12 @@
 
 - (NSDictionary *)selections;
 {
-    return [self.selectionRects copy];
+    return [self.__selections copy];
+}
+
+- (BOOL)canPaste;
+{
+    return self.temporarySelection != nil;
 }
 
 @end

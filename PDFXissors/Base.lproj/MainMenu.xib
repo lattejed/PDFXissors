@@ -890,6 +890,7 @@
                     </textFieldCell>
                 </textField>
             </subviews>
+            <point key="canvasLocation" x="971.5" y="603"/>
         </customView>
         <splitView dividerStyle="paneSplitter" vertical="YES" id="TDt-2Z-fqd">
             <rect key="frame" x="0.0" y="0.0" width="589" height="449"/>

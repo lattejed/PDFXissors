@@ -52,4 +52,16 @@ CGRect2Frame(const CGRect r)
     return CGPoints2Frame(r.origin, CGPointSub(CGSize2Point(r.size), r.origin));
 }
 
+static inline CGSize
+CGSizeAdd(const CGSize s1, const CGSize s2)
+{
+    return CGSizeMake(s1.width + s2.width, s1.height + s2.height);
+}
+
+static inline CGSize
+CGSizeSub(const CGSize s1, const CGSize s2)
+{
+    return CGSizeMake(s1.width - s2.width, s1.height - s2.height);
+}
+
 #endif

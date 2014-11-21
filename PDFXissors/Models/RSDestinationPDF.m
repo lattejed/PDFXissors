@@ -50,4 +50,9 @@
                             object:self];
 }
 
+- (BOOL)canPaste;
+{
+    return _document != nil && _document.pageCount > 0;
+}
+
 @end

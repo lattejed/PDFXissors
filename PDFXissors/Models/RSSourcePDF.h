@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, kRSSourcePDFSelectionType) {
 @property (nonatomic, assign) CGFloat currentScale;
 @property (nonatomic, assign) kRSSourcePDFSelectionType selectionType;
 @property (nonatomic, assign) CGRect currentSelectionRect;
-@property (nonatomic, assign) NSAttributedString* currentSelectionString;
+@property (nonatomic, copy) NSAttributedString* currentSelectionString;
 
 - (BOOL)canCopy;
 

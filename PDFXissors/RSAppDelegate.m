@@ -30,6 +30,7 @@
     self.rightToolbarView.frame = (CGRect){500, 0, self.rightToolbarView.bounds.size.width, aWindow.titleBarView.bounds.size.height};
     [aWindow.titleBarView addSubview:self.rightToolbarView];
     
+    // TODO: Move this into a custom view so we don't have drawing code here
     NSView* contentView = self.window.contentView;
     RSViewDrawBlock* contentView2 = [[RSViewDrawBlock alloc] initWithFrame:contentView.bounds];
     contentView2.drawBlock = ^(NSView* view, NSRect dirtyRect) {
