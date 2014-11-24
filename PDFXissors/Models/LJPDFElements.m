@@ -1,21 +1,21 @@
 //
-//  LJPDFSelections.m
+//  LJPDFElements.m
 //
 //  Created by Matthew Smith on 4/28/14.
 //  Copyright (c) 2014 LatteJed. All rights reserved.
 //
 
-#import "LJPDFSelections.h"
-#import "LJPDFSelection.h"
+#import "LJPDFElement.h"
+#import "LJPDFElements.h"
 
-@interface LJPDFSelections ()
+@interface LJPDFElements ()
 
 @property (nonatomic, strong) NSMutableDictionary* __selections;
-@property (nonatomic, strong) LJPDFSelection* temporarySelection;
+@property (nonatomic, strong) LJPDFElement* temporarySelection;
 
 @end
 
-@implementation LJPDFSelections
+@implementation LJPDFElements
 
 + (instancetype)sharedInstance;
 {
@@ -29,8 +29,8 @@
 
 - (void)setTemporarySelectionWithSrcRect:(CGRect)srcRect forSelectionID:(NSString *)UUID;
 {
-    LJPDFSelection* selection = [LJPDFSelection new];
-    selection.type = kLJPDFSelectionTypePDF;
+    LJPDFElement* selection = [LJPDFElement new];
+    selection.type = kLJPDFElementTypePDF;
     selection.ID = UUID;
     selection.srcRect = srcRect;
     self.temporarySelection = selection;
@@ -41,8 +41,8 @@
 
 - (void)setTemporarySelectionWithString:(NSAttributedString *)string forSelectionID:(NSString *)UUID;
 {
-    LJPDFSelection* selection = [LJPDFSelection new];
-    selection.type = kLJPDFSelectionTypeString;
+    LJPDFElement* selection = [LJPDFElement new];
+    selection.type = kLJPDFElementTypeString;
     selection.ID = UUID;
     selection.string = string;
     self.temporarySelection = selection;
@@ -59,8 +59,8 @@
 - (void)addSelectionWithString:(NSAttributedString *)string forSelectionID:(NSString *)UUID;
 {
     if (!self.__selections) self.__selections = [NSMutableDictionary dictionary];
-    LJPDFSelection* selection = [LJPDFSelection new];
-    selection.type = kLJPDFSelectionTypeString;
+    LJPDFElement* selection = [LJPDFElement new];
+    selection.type = kLJPDFElementTypeString;
     selection.ID = UUID;
     selection.string = string;
     [self.__selections setObject:selection forKey:UUID];
@@ -72,8 +72,8 @@
 - (void)addSelectionWithImage:(NSImage *)image forSelectionID:(NSString *)UUID;
 {
     if (!self.__selections) self.__selections = [NSMutableDictionary dictionary];
-    LJPDFSelection* selection = [LJPDFSelection new];
-    selection.type = kLJPDFSelectionTypeImage;
+    LJPDFElement* selection = [LJPDFElement new];
+    selection.type = kLJPDFElementTypeImage;
     selection.ID = UUID;
     selection.image = image;
     [self.__selections setObject:selection forKey:UUID];
@@ -82,7 +82,7 @@
                           userInfo:@{kNotificationPDFSelectionObjectKey: selection}];
 }
 
-- (void)addSelection:(LJPDFSelection *)selection forSelectionID:(NSString *)UUID;
+- (void)addSelection:(LJPDFElement *)selection forSelectionID:(NSString *)UUID;
 {
     if (!self.__selections) self.__selections = [NSMutableDictionary dictionary];
     [self.__selections setObject:selection forKey:UUID];
@@ -93,7 +93,7 @@
 
 - (void)updateSelectionSrcRect:(CGRect)srcRect forSelectionID:(NSString *)UUID;
 {
-    LJPDFSelection* selection = [self.__selections objectForKey:UUID];
+    LJPDFElement* selection = [self.__selections objectForKey:UUID];
     selection.srcRect = srcRect;
     [N_CENTER postNotificationName:kNotificationPDFSelectionSrcUpdate
                             object:self
@@ -102,7 +102,7 @@
 
 - (void)updateSelectionDstRect:(CGRect)dstRect forSelectionID:(NSString *)UUID;
 {
-    LJPDFSelection* selection = [self.__selections objectForKey:UUID];
+    LJPDFElement* selection = [self.__selections objectForKey:UUID];
     selection.dstRect = dstRect;
     [N_CENTER postNotificationName:kNotificationPDFSelectionDstUpdate
                             object:self
@@ -111,7 +111,7 @@
 
 - (void)removeSelectionForSelectionID:(NSString *)UUID;
 {
-    LJPDFSelection* selection = [self.__selections objectForKey:UUID];
+    LJPDFElement* selection = [self.__selections objectForKey:UUID];
     [self.__selections removeObjectForKey:UUID];
     [N_CENTER postNotificationName:kNotificationPDFSelectionRemove
                             object:self

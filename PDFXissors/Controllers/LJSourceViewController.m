@@ -14,7 +14,7 @@
 //#import "LJDestinationPDF.h"
 //#import "LJDragResizeView.h"
 //#import "LJContentViewWithCloseButton.h"
-#import "LJPDFSelections.h"
+#import "LJPDFElements.h"
 //#import "LJPDFSelection.h"
 
 @interface LJSourceViewController ()
@@ -32,7 +32,7 @@
 
 //@property (nonatomic, weak) IBOutlet LJBorderedView* menuView;
 @property (nonatomic, strong) RSSourcePDF* sourcePDF;
-@property (nonatomic, strong) LJPDFSelections* pdfSelections;
+@property (nonatomic, strong) LJPDFElements* pdfSelections;
 //@property (nonatomic, strong) NSMutableDictionary* selectionViews;
 
 @end
@@ -225,7 +225,7 @@
     };*/
     
     //self.sourcePDF = [RSSourcePDF new];
-    self.pdfSelections = [LJPDFSelections sharedInstance];
+    self.pdfSelections = [LJPDFElements sharedInstance];
 
 #if DEV_LOAD_TEST_PDF
     self.sourcePDF = [RSSourcePDF new];

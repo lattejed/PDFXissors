@@ -1,16 +1,16 @@
 //
-//  LJPDFSelection.m
+//  LJPDFElement.m
 //
 //  Created by Matthew Smith on 4/25/14.
 //  Copyright (c) 2014 LatteJed. All rights reserved.
 //
 
-#import "LJPDFSelection.h"
+#import "LJPDFElement.h"
 
-@interface LJPDFSelection ()
+@interface LJPDFElement ()
 
 @end
 
-@implementation LJPDFSelection
+@implementation LJPDFElement
 
 @end

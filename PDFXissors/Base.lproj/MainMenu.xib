@@ -890,7 +890,7 @@
                     </textFieldCell>
                 </textField>
             </subviews>
-            <point key="canvasLocation" x="971.5" y="603"/>
+            <point key="canvasLocation" x="956.5" y="22"/>
         </customView>
         <splitView dividerStyle="paneSplitter" vertical="YES" id="TDt-2Z-fqd">
             <rect key="frame" x="0.0" y="0.0" width="589" height="449"/>
@@ -910,10 +910,29 @@
                     <rect key="frame" x="302" y="0.0" width="287" height="449"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <subviews>
-                        <pdfView autoresizesSubviews="NO" wantsLayer="YES" id="hbT-Ie-GSq" customClass="RSPDFView">
-                            <rect key="frame" x="0.0" y="10" width="277.5" height="429"/>
+                        <scrollView autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="SuK-ZS-hwc">
+                            <rect key="frame" x="0.0" y="0.0" width="287" height="449"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        </pdfView>
+                            <clipView key="contentView" id="Bwa-2Z-vW0">
+                                <rect key="frame" x="1" y="1" width="248" height="158"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <collectionView maxNumberOfColumns="1" id="itL-zf-aM9">
+                                        <rect key="frame" x="0.0" y="0.0" width="248" height="158"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </collectionView>
+                                </subviews>
+                            </clipView>
+                            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Yba-Ie-SJ9">
+                                <rect key="frame" x="1" y="144" width="233" height="15"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </scroller>
+                            <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Yz7-Et-tne">
+                                <rect key="frame" x="234" y="1" width="15" height="143"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </scroller>
+                        </scrollView>
                     </subviews>
                 </customView>
             </subviews>
@@ -947,7 +966,6 @@
                 <outlet property="pageBackButton" destination="JPj-tP-dFj" id="RFG-Aq-be2"/>
                 <outlet property="pageFwdButton" destination="aLQ-Oz-Ouj" id="frH-JE-eHR"/>
                 <outlet property="pageTextField" destination="ggr-0T-DEi" id="khI-aa-zZ2"/>
-                <outlet property="pdfView" destination="hbT-Ie-GSq" id="Bad-xU-q21"/>
                 <outlet property="removePageButton" destination="maO-e4-V7n" id="7hz-8C-puZ"/>
                 <outlet property="view" destination="qN1-5H-YLB" id="2RU-cZ-cYg"/>
                 <outlet property="zoomInButton" destination="c7t-aq-9QN" id="aqX-pQ-QhZ"/>
@@ -1074,6 +1092,10 @@ Gw
                 <outlet property="window" destination="bGX-br-Mds" id="hOL-XY-uVe"/>
             </connections>
         </customObject>
+        <view id="YqB-UP-HdO">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+        </view>
     </objects>
     <resources>
         <image name="br_next_icon&amp;16" width="16" height="16"/>
