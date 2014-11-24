@@ -32,7 +32,7 @@
 
 //@property (nonatomic, weak) IBOutlet LJBorderedView* menuView;
 @property (nonatomic, strong) RSSourcePDF* sourcePDF;
-@property (nonatomic, strong) LJPDFElements* pdfSelections;
+@property (nonatomic, strong) LJPDFElements* pdfElements;
 //@property (nonatomic, strong) NSMutableDictionary* selectionViews;
 
 @end
@@ -170,12 +170,12 @@
         {
             NSString* uuid = [NSString UUID]; // TODO:
             CGRect srcRect = [self.pdfView convertRect:self.sourcePDF.currentSelectionRect toPage:self.pdfView.currentPage]; // TODO: selection?
-            [self.pdfSelections setTemporarySelectionWithSrcRect:srcRect forSelectionID:uuid];
+            [self.pdfElements setTemporaryElementWithSrcRect:srcRect forElementID:uuid];
         }
         else if (self.sourcePDF.selectionType == kRSSourcePDFSelectionTypeText)
         {
             NSString* uuid = [NSString UUID]; // TODO:
-            [self.pdfSelections setTemporarySelectionWithString:self.sourcePDF.currentSelectionString forSelectionID:uuid];
+            [self.pdfElements setTemporaryElementWithString:self.sourcePDF.currentSelectionString forElementID:uuid];
         }
     }];
     
@@ -185,47 +185,9 @@
                       usingBlock:^(NSNotification *note) {
                           self.doCopyButton.enabled = self.sourcePDF.canCopy;
                       }];
-    
-    /*
-    [N_CENTER addObserverForName:NSWindowDidResizeNotification
-                          object:nil
-                           queue:nil
-                      usingBlock:^(NSNotification *note) {
-                          //for (LJPDFSelection* sel in [[self.pdfSelections selections] allValues])
-                          //{
-                          //    LJDragResizeView* view = [self.selectionViews objectForKey:sel.ID];
-                          //    view.frame = [self.pdfView convertRect:sel.srcRect fromPage:self.pdfView.currentPage];
-                          //    view.contentView.frame = view.bounds;
-                          //}
-                      }];*/
-    /*
-    self.pdfView.addSelectionView = ^(CGPoint point, NSEvent* theEvent) {
-        if (!self.selectionViews) self.selectionViews = [NSMutableDictionary dictionary];
-        LJDragResizeView* view = [LJDragResizeView dragResizeViewForPoint:point];
-        view.selectionID = [NSString UUID];
-        NSViewController *vc = [[NSViewController alloc] initWithNibName:@"LJContentViewWithCloseButton" bundle:nil];
-        LJContentViewWithCloseButton* selectionView = (LJContentViewWithCloseButton *)vc.view;
-        [self.pdfSelections addSelectionWithColor:selectionView.borderColor forSelectionID:view.selectionID];
-        [selectionView.deleteButton setActionBlock:^{
-            [view removeFromSuperview];
-            [self.pdfSelections removeSelectionForSelectionID:view.selectionID];
-            [self.selectionViews removeObjectForKey:view.selectionID];
-        }];
-        view.selectionChanged = ^(LJDragResizeView* view, CGRect rect) {
-            view.frame = rect;
-            view.contentView.frame = view.bounds;
-            CGRect selection = CGRectInset(rect, 2, 2);
-            CGRect srcRect = [self.pdfView convertRect:selection toPage:self.pdfView.currentPage];
-            [self.pdfSelections updateSelectionSrcRect:srcRect forSelectionID:view.selectionID];
-        };
-        [view setContentView:vc.view hitRadius:10];
-        [self.pdfView addSubview:view];
-        [self.selectionViews setObject:view forKey:view.selectionID];
-        [view mouseDragged:theEvent];
-    };*/
-    
+        
     //self.sourcePDF = [RSSourcePDF new];
-    self.pdfSelections = [LJPDFElements sharedInstance];
+    self.pdfElements = [LJPDFElements sharedInstance];
 
 #if DEV_LOAD_TEST_PDF
     self.sourcePDF = [RSSourcePDF new];

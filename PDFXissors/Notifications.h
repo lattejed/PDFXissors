@@ -9,12 +9,12 @@
 #ifndef PDFXissors_Notifications_h
 #define PDFXissors_Notifications_h
 
-static NSString* const kNotificationPDFSelectionTempUpdate              = @"kNotificationPDFSelectionTempUpdate";
-static NSString* const kNotificationPDFSelectionAdd                     = @"kNotificationPDFSelectionAdd";
-static NSString* const kNotificationPDFSelectionSrcUpdate               = @"kNotificationPDFSelectionSrcUpdate";
-static NSString* const kNotificationPDFSelectionDstUpdate               = @"kNotificationPDFSelectionDstUpdate";
-static NSString* const kNotificationPDFSelectionRemove                  = @"kNotificationPDFSelectionRemove";
-static NSString* const kNotificationPDFSelectionObjectKey               = @"kNotificationPDFSelectionObjectKey";
+static NSString* const kNotificationPDFElementTempUpdate                = @"kNotificationPDFElementTempUpdate";
+static NSString* const kNotificationPDFElementAdd                       = @"kNotificationPDFElementAdd";
+static NSString* const kNotificationPDFElementSrcUpdate                 = @"kNotificationPDFElementSrcUpdate";
+static NSString* const kNotificationPDFElementDstUpdate                 = @"kNotificationPDFElementDstUpdate";
+static NSString* const kNotificationPDFElementRemove                    = @"kNotificationPDFElementRemove";
+static NSString* const kNotificationPDFElementObjectKey                 = @"kNotificationPDFElementObjectKey";
 
 static NSString* const kNotificationSourcePDFDidUpdate                  = @"kNotificationSourcePDFDidUpdate";
 static NSString* const kNotificationSourcePDFPageDidUpdate              = @"kNotificationSourcePDFPageDidUpdate";

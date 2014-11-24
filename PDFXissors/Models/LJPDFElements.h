@@ -12,16 +12,16 @@
 @interface LJPDFElements : NSObject
 
 + (instancetype)sharedInstance;
-- (void)setTemporarySelectionWithSrcRect:(CGRect)srcRect forSelectionID:(NSString *)UUID;
-- (void)setTemporarySelectionWithString:(NSAttributedString *)string forSelectionID:(NSString *)UUID;
-- (void)promoteTemporarySelection;
-- (void)addSelectionWithString:(NSAttributedString *)string forSelectionID:(NSString *)UUID;
-- (void)addSelectionWithImage:(NSImage *)image forSelectionID:(NSString *)UUID;
-- (void)addSelection:(LJPDFElement *)selection forSelectionID:(NSString *)UUID;
-- (void)updateSelectionSrcRect:(CGRect)srcRect forSelectionID:(NSString *)UUID;
-- (void)updateSelectionDstRect:(CGRect)dstRect forSelectionID:(NSString *)UUID;
-- (void)removeSelectionForSelectionID:(NSString *)UUID;
-- (NSDictionary *)selections;
+- (void)setTemporaryElementWithSrcRect:(CGRect)srcRect forElementID:(NSString *)UUID;
+- (void)setTemporaryElementWithString:(NSAttributedString *)string forElementID:(NSString *)UUID;
+- (void)promoteTemporaryElement;
+- (void)addElementWithString:(NSAttributedString *)string forElementID:(NSString *)UUID;
+- (void)addElementWithImage:(NSImage *)image forElementID:(NSString *)UUID;
+- (void)addElement:(LJPDFElement *)element forElementID:(NSString *)UUID;
+- (void)updateElementSrcRect:(CGRect)srcRect forElementID:(NSString *)UUID;
+- (void)updateElementDstRect:(CGRect)dstRect forElementID:(NSString *)UUID;
+- (void)removeElementForElementID:(NSString *)UUID;
+- (NSDictionary *)elements;
 - (BOOL)canPaste;
 
 @end
