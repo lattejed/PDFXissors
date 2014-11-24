@@ -84,6 +84,7 @@
                                                             (unsigned long)self.destinationPDF.currentPage + 1,
                                                             (unsigned long)self.pdfView.document.pageCount];
                           
+                          // TODO: Should these be here?
                           BOOL canPaste = [self.destinationPDF canPaste];
                           self.doPasteButton.enabled = canPaste && [self.pdfSelections canPaste];
                           self.addImageButton.enabled = canPaste;
@@ -152,6 +153,8 @@
                       }];
     }];
     
+    // TODO: We need to be able to remove these by page
+    
     [N_CENTER addObserverForName:kNotificationPDFSelectionAdd
                           object:nil
                            queue:nil
@@ -168,7 +171,12 @@
                               [self.pdfView addSubview:controlView];
                           } else if (selection.type == kLJPDFSelectionTypePDF) {
                               
-                              // TODO:
+                              CGRect frame = [LJResizableDraggableView initialFrameForParentView:self.pdfView size:selection.srcRect.size preserveAspect:YES];
+                              controlView = [[LJResizableDraggableView alloc] initWithFrame:frame];
+
+                              // TODO: We need to handle source pdf, source page for LJPDFClipView
+                              
+                              [self.pdfView addSubview:controlView];
 
                           } else if (selection.type == kLJPDFSelectionTypeImage) {
                               

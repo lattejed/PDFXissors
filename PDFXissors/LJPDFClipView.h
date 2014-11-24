@@ -12,7 +12,6 @@
 
 @interface LJPDFClipView : NSView
 
-@property (nonatomic, weak) LJDragResizeView* parentDragView;
 @property (nonatomic, assign) CGRect srcRect;
 
 - (void)setSourcePDFURL:(NSURL *)sourcePDFURL page:(NSUInteger)page;
