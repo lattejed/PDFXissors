@@ -668,7 +668,6 @@
                 <outlet property="window" destination="371" id="532"/>
             </connections>
         </customObject>
-        <collectionViewItem nibName="" id="Yjb-n8-dOS"/>
         <customObject id="420" customClass="NSFontManager"/>
         <customView id="63T-1P-Q5w" userLabel="Left Toolbar">
             <rect key="frame" x="0.0" y="0.0" width="409" height="38"/>
@@ -911,26 +910,25 @@
                     <rect key="frame" x="302" y="0.0" width="287" height="449"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <subviews>
-                        <scrollView autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="SuK-ZS-hwc">
+                        <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="KBp-cv-gEf">
                             <rect key="frame" x="0.0" y="0.0" width="287" height="449"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <clipView key="contentView" id="Bwa-2Z-vW0">
-                                <rect key="frame" x="1" y="1" width="248" height="158"/>
+                            <clipView key="contentView" id="M9R-y0-m6W">
+                                <rect key="frame" x="1" y="1" width="166" height="79"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <collectionView maxNumberOfColumns="1" id="itL-zf-aM9">
-                                        <rect key="frame" x="0.0" y="0.0" width="248" height="158"/>
+                                    <view id="fte-ph-pea">
+                                        <rect key="frame" x="0.0" y="0.0" width="285" height="447"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                    </collectionView>
+                                    </view>
                                 </subviews>
                             </clipView>
-                            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Yba-Ie-SJ9">
-                                <rect key="frame" x="1" y="144" width="233" height="15"/>
+                            <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="v2S-V9-GcG">
+                                <rect key="frame" x="1" y="80" width="166" height="15"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </scroller>
-                            <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Yz7-Et-tne">
-                                <rect key="frame" x="234" y="1" width="15" height="143"/>
+                            <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="muJ-8y-oIA">
+                                <rect key="frame" x="167" y="1" width="15" height="79"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </scroller>
                         </scrollView>
@@ -963,6 +961,7 @@
                 <outlet property="addPageButton" destination="knL-il-MP8" id="DNP-BR-Uf5"/>
                 <outlet property="addPagePanel" destination="bGX-br-Mds" id="lFq-ki-1eN"/>
                 <outlet property="addTextButton" destination="OVo-gV-qLE" id="NeR-6d-5yO"/>
+                <outlet property="destinationPDFController" destination="tMf-2N-avR" id="xf6-u6-081"/>
                 <outlet property="doPasteButton" destination="44K-AO-Mhl" id="udx-Us-QEM"/>
                 <outlet property="pageBackButton" destination="JPj-tP-dFj" id="RFG-Aq-be2"/>
                 <outlet property="pageFwdButton" destination="aLQ-Oz-Ouj" id="frH-JE-eHR"/>
@@ -1097,6 +1096,11 @@ Gw
             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
             <autoresizingMask key="autoresizingMask"/>
         </view>
+        <customObject id="tMf-2N-avR" customClass="RSDestinationPDFController">
+            <connections>
+                <outlet property="scrollView" destination="KBp-cv-gEf" id="dkh-kj-MTD"/>
+            </connections>
+        </customObject>
     </objects>
     <resources>
         <image name="br_next_icon&amp;16" width="16" height="16"/>

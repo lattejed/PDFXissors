@@ -18,6 +18,7 @@
 #import "RSDestinationPDF.h"
 #import "RSDestinationPDFPage.h"
 #import "RSPDFElement.h"
+#import "RSDestinationPDFController.h"
 
 @interface LJDestinationViewController ()
 
@@ -32,7 +33,7 @@
 @property (nonatomic, weak) IBOutlet NSButton* addTextButton;
 @property (nonatomic, weak) IBOutlet NSButton* addImageButton;
 @property (nonatomic, weak) IBOutlet NSButton* doPasteButton;
-@property (nonatomic, weak) IBOutlet NSCollectionView* collectionView;
+@property (nonatomic, weak) IBOutlet RSDestinationPDFController* destinationPDFController;
 
 @property (nonatomic, strong) RSDestinationPDF* destinationPDF;
 @property (nonatomic, strong) NSMutableArray* pages;
@@ -47,7 +48,7 @@
     
     
     self.pages = [NSMutableArray array];
-    self.collectionView.content = self.pages;
+    //self.collectionView.content = self.pages;
     
     self.doPasteButton.enabled = false;
     self.addImageButton.enabled = false;
@@ -77,7 +78,7 @@
                       usingBlock:^(NSNotification *note) {
                           if (self.pages == nil) {
                               self.pages = [NSMutableArray array];
-                              self.collectionView.content = self.pages;
+                              //self.collectionView.content = self.pages;
                           }
                           
                       }];

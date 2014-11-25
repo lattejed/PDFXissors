@@ -52,6 +52,7 @@
 		34DFFB531A244DB1004B12DC /* RSDestinationPDF.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DFFB521A244DB1004B12DC /* RSDestinationPDF.m */; };
 		34DFFB561A244E0A004B12DC /* RSDestinationPDFPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DFFB551A244E0A004B12DC /* RSDestinationPDFPage.m */; };
 		34DFFB591A2450C1004B12DC /* RSPDFElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DFFB581A2450C1004B12DC /* RSPDFElement.m */; };
+		34DFFB5C1A246F56004B12DC /* RSDestinationPDFController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DFFB5B1A246F56004B12DC /* RSDestinationPDFController.m */; };
 		DB88401D1F5B47D9B1E1683C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B78ABA448BF464B86D9456D /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -140,6 +141,8 @@
 		34DFFB551A244E0A004B12DC /* RSDestinationPDFPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSDestinationPDFPage.m; sourceTree = "<group>"; };
 		34DFFB571A2450C1004B12DC /* RSPDFElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSPDFElement.h; sourceTree = "<group>"; };
 		34DFFB581A2450C1004B12DC /* RSPDFElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSPDFElement.m; sourceTree = "<group>"; };
+		34DFFB5A1A246F56004B12DC /* RSDestinationPDFController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSDestinationPDFController.h; sourceTree = "<group>"; };
+		34DFFB5B1A246F56004B12DC /* RSDestinationPDFController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSDestinationPDFController.m; sourceTree = "<group>"; };
 		3B78ABA448BF464B86D9456D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD7C83E203B04AAE9DB41819 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,6 +177,8 @@
 				3406B3C519234F5A0078D965 /* LJSourceViewController.m */,
 				3406B3C619234F5A0078D965 /* LJDestinationViewController.h */,
 				3406B3C719234F5A0078D965 /* LJDestinationViewController.m */,
+				34DFFB5A1A246F56004B12DC /* RSDestinationPDFController.h */,
+				34DFFB5B1A246F56004B12DC /* RSDestinationPDFController.m */,
 				3404220519542A3500705BB1 /* RSAddPagePanelController.h */,
 				3404220619542A3500705BB1 /* RSAddPagePanelController.m */,
 			);
@@ -519,6 +524,7 @@
 				3406B3D4192350F90078D965 /* NSString+UUID.m in Sources */,
 				3406B3CB192350B80078D965 /* LJSourceViewController.m in Sources */,
 				34DFFB531A244DB1004B12DC /* RSDestinationPDF.m in Sources */,
+				34DFFB5C1A246F56004B12DC /* RSDestinationPDFController.m in Sources */,
 				346AD6501918E38000C18986 /* RSViewDrawBlock.m in Sources */,
 				34DFFB591A2450C1004B12DC /* RSPDFElement.m in Sources */,
 				34DFFB301A231161004B12DC /* NSCollectionView+LJBlocks.m in Sources */,
