@@ -9,6 +9,7 @@
 #ifndef PDFXissors_Notifications_h
 #define PDFXissors_Notifications_h
 
-//static NSString* const kNotificationPDFElementTempUpdate                = @"kNotificationPDFElementTempUpdate";
+static NSString* const kNotificationDestinationPDFPagesDidUpdate = @"kNotificationDestinationPDFPagesDidUpdate";
+
 
 #endif

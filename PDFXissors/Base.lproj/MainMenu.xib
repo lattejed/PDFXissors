@@ -668,6 +668,7 @@
                 <outlet property="window" destination="371" id="532"/>
             </connections>
         </customObject>
+        <collectionViewItem nibName="" id="Yjb-n8-dOS"/>
         <customObject id="420" customClass="NSFontManager"/>
         <customView id="63T-1P-Q5w" userLabel="Left Toolbar">
             <rect key="frame" x="0.0" y="0.0" width="409" height="38"/>

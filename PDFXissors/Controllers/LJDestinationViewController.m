@@ -15,6 +15,10 @@
 #import "RSTextView.h"
 #import "RSImageView.h"
 
+#import "RSDestinationPDF.h"
+#import "RSDestinationPDFPage.h"
+#import "RSPDFElement.h"
+
 @interface LJDestinationViewController ()
 
 @property (nonatomic, weak) IBOutlet NSButton* addPageButton;
@@ -28,8 +32,10 @@
 @property (nonatomic, weak) IBOutlet NSButton* addTextButton;
 @property (nonatomic, weak) IBOutlet NSButton* addImageButton;
 @property (nonatomic, weak) IBOutlet NSButton* doPasteButton;
-//@property (nonatomic, weak) IBOutlet RSPDFView* pdfView;
 @property (nonatomic, weak) IBOutlet NSCollectionView* collectionView;
+
+@property (nonatomic, strong) RSDestinationPDF* destinationPDF;
+@property (nonatomic, strong) NSMutableArray* pages;
 
 @end
 
@@ -38,6 +44,10 @@
 - (void)awakeFromNib;
 {
     [super awakeFromNib];
+    
+    
+    self.pages = [NSMutableArray array];
+    self.collectionView.content = self.pages;
     
     self.doPasteButton.enabled = false;
     self.addImageButton.enabled = false;
@@ -53,12 +63,24 @@
     
     RSAddPagePanelController* panelController = [self.addPagePanel windowController];
     panelController.addPageForSize = ^(CGSize size) {
-        //[self.destinationPDF addPageWithSize:size];
+        [self.destinationPDF appendPageWithSize:size];
     };
     
     [self.removePageButton setActionBlock:^{
        //[self.destinationPDF removeCurrentPage];
     }];
+    
+    
+    [N_CENTER addObserverForName:kNotificationDestinationPDFPagesDidUpdate
+                          object:nil
+                           queue:nil
+                      usingBlock:^(NSNotification *note) {
+                          if (self.pages == nil) {
+                              self.pages = [NSMutableArray array];
+                              self.collectionView.content = self.pages;
+                          }
+                          
+                      }];
     
     [N_CENTER addObserverForName:@""//kNotificationDestinationPDFPageDidUpdate
                           object:nil
@@ -189,7 +211,8 @@
     
     //self.pdfView.allowSelection = ^BOOL { return NO; };
     //self.pdfElements = [LJPDFElements sharedInstance];
-    //self.destinationPDF = [RSDestinationPDF new];
+    
+    self.destinationPDF = [RSDestinationPDF new];
     
     //self.menuView.borderOptions = kLJBorderedViewBorderOptionsBottom;
 }
