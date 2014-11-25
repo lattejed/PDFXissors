@@ -8,19 +8,9 @@
 
 #import "LJDestinationViewController.h"
 #import <Quartz/Quartz.h>
-//#import "LJBorderedView.h"
 #import "RSPDFView.h"
-#import "RSDestinationPDF.h"
 #import "RSAddPagePanelController.h"
-//#import "LJDestinationView.h"
-//#import "LJDestinationPDF.h"
-//#import "LJSourcePDFs.h"
-//#import "LJDragResizeView.h"
-//#import "LJDestinationSelectionView.h"
-#import "LJPDFElement.h"
 #import "LJPDFClipView.h"
-#import "LJPDFElements.h"
-//#import "LJContentViewWithCloseButton.h"
 #import "LJResizableDraggableView.h"
 #import "RSTextView.h"
 #import "RSImageView.h"
@@ -40,8 +30,6 @@
 @property (nonatomic, weak) IBOutlet NSButton* doPasteButton;
 //@property (nonatomic, weak) IBOutlet RSPDFView* pdfView;
 @property (nonatomic, weak) IBOutlet NSCollectionView* collectionView;
-@property (nonatomic, strong) RSDestinationPDF* destinationPDF;
-@property (nonatomic, strong) LJPDFElements* pdfElements;
 
 @end
 
@@ -65,14 +53,14 @@
     
     RSAddPagePanelController* panelController = [self.addPagePanel windowController];
     panelController.addPageForSize = ^(CGSize size) {
-        [self.destinationPDF addPageWithSize:size];
+        //[self.destinationPDF addPageWithSize:size];
     };
     
     [self.removePageButton setActionBlock:^{
-        [self.destinationPDF removeCurrentPage];
+       //[self.destinationPDF removeCurrentPage];
     }];
     
-    [N_CENTER addObserverForName:kNotificationDestinationPDFPageDidUpdate
+    [N_CENTER addObserverForName:@""//kNotificationDestinationPDFPageDidUpdate
                           object:nil
                            queue:nil
                       usingBlock:^(NSNotification *note) {
@@ -86,10 +74,10 @@
                           //                                  (unsigned long)self.pdfView.document.pageCount];
                           
                           // TODO: Should these be here?
-                          BOOL canPaste = [self.destinationPDF canPaste];
-                          self.doPasteButton.enabled = canPaste && [self.pdfElements canPaste];
-                          self.addImageButton.enabled = canPaste;
-                          self.addTextButton.enabled = canPaste;
+                          //BOOL canPaste = [self.destinationPDF canPaste];
+                          //self.doPasteButton.enabled = canPaste && [self.pdfElements canPaste];
+                          //self.addImageButton.enabled = canPaste;
+                          //self.addTextButton.enabled = canPaste;
                       }];
     
     [self.pageBackButton setActionBlock:^{
@@ -100,7 +88,7 @@
         //if (self.pdfView.canGoForward) self.destinationPDF.currentPage = self.destinationPDF.currentPage + 1;
     }];
     
-    [N_CENTER addObserverForName:kNotificationDestinationPDFZoomDidUpdate
+    [N_CENTER addObserverForName:@""//kNotificationDestinationPDFZoomDidUpdate
                           object:nil
                            queue:nil
                       usingBlock:^(NSNotification *note) {
@@ -117,15 +105,15 @@
         //if (self.pdfView.canZoomIn) self.destinationPDF.currentScale = self.destinationPDF.currentScale * 1.414;
     }];
     
-    [N_CENTER addObserverForName:kNotificationPDFElementTempUpdate
+    [N_CENTER addObserverForName:@""//kNotificationPDFElementTempUpdate
                           object:nil
                            queue:nil
                       usingBlock:^(NSNotification *note) {
-                          self.doPasteButton.enabled = [self.destinationPDF canPaste] && [self.pdfElements canPaste];
+                          //self.doPasteButton.enabled = [self.destinationPDF canPaste] && [self.pdfElements canPaste];
                       }];
 
     [self.doPasteButton setActionBlock:^{
-        [self.pdfElements promoteTemporaryElement];
+        //[self.pdfElements promoteTemporaryElement];
     }];
     
     [self.addTextButton setActionBlock:^{
@@ -147,8 +135,8 @@
                               NSURL* url = [[panel URLs] firstObject];
                               NSImage* image = [[NSImage alloc] initWithContentsOfURL:url];
                               if (image != nil) {
-                                  NSString* uuid = [NSString UUID];
-                                  [self.pdfElements addElementWithImage:image forElementID:uuid];
+                                  //NSString* uuid = [NSString UUID];
+                                  //[self.pdfElements addElementWithImage:image forElementID:uuid];
                               }
                           }
                       }];
@@ -156,13 +144,13 @@
     
     // TODO: We need to be able to remove these by page
     
-    [N_CENTER addObserverForName:kNotificationPDFElementAdd
+    [N_CENTER addObserverForName:@""//kNotificationPDFElementAdd
                           object:nil
                            queue:nil
                       usingBlock:^(NSNotification *note) {
-                          LJPDFElement* selection = [[note userInfo] objectForKey:kNotificationPDFElementObjectKey];
-                          LJResizableDraggableView* controlView = nil;
-                          if (selection.type == kLJPDFElementTypeString) {
+                          //LJPDFElement* selection = [[note userInfo] objectForKey:kNotificationPDFElementObjectKey];
+                          //LJResizableDraggableView* controlView = nil;
+                          //if (selection.type == kLJPDFElementTypeString) {
                               
                               // TODO: We don't know how this will draw to the final page
                               //controlView = [[LJResizableDraggableView alloc] initWithFrame:CGRectMake(50, 50, 200, 200)]; // TODO:
@@ -170,7 +158,7 @@
                               //[[textView textStorage] setAttributedString:selection.string];
                               //[controlView setContentView:textView];
                               //[self.pdfView addSubview:controlView];
-                          } else if (selection.type == kLJPDFElementTypePDF) {
+                          //} else if (selection.type == kLJPDFElementTypePDF) {
                               
                               //CGRect frame = [LJResizableDraggableView initialFrameForParentView:self.pdfView size:selection.srcRect.size preserveAspect:YES];
                               //controlView = [[LJResizableDraggableView alloc] initWithFrame:frame];
@@ -179,7 +167,7 @@
                               
                               //[self.pdfView addSubview:controlView];
 
-                          } else if (selection.type == kLJPDFElementTypeImage) {
+                          //} else if (selection.type == kLJPDFElementTypeImage) {
                               
                               //CGRect frame = [LJResizableDraggableView initialFrameForParentView:self.pdfView size:selection.image.size preserveAspect:YES];
                               //controlView = [[LJResizableDraggableView alloc] initWithFrame:frame];
@@ -187,21 +175,21 @@
                               //imageView.image = selection.image;
                               //[controlView setContentView:imageView];
                               //[self.pdfView addSubview:controlView];
-                          }
-                          if (controlView != nil) {
-                              controlView.viewDidClose = ^(NSView* view){
-                                  [view removeFromSuperview];
-                                  [self.pdfElements removeElementForElementID:selection.ID];
-                              };
-                              controlView.contentViewFrameUpdate = ^(NSView* view, CGRect rect){
-                                  [self.pdfElements updateElementSrcRect:rect forElementID:selection.ID];
-                              };
-                          }
+                          //}
+                          //if (controlView != nil) {
+                          //    controlView.viewDidClose = ^(NSView* view){
+                          //        [view removeFromSuperview];
+                          //        [self.pdfElements removeElementForElementID:selection.ID];
+                          //    };
+                          //    controlView.contentViewFrameUpdate = ^(NSView* view, CGRect rect){
+                          //        [self.pdfElements updateElementSrcRect:rect forElementID:selection.ID];
+                          //    };
+                          //}
                       }];
     
     //self.pdfView.allowSelection = ^BOOL { return NO; };
-    self.pdfElements = [LJPDFElements sharedInstance];
-    self.destinationPDF = [RSDestinationPDF new];
+    //self.pdfElements = [LJPDFElements sharedInstance];
+    //self.destinationPDF = [RSDestinationPDF new];
     
     //self.menuView.borderOptions = kLJBorderedViewBorderOptionsBottom;
 }
