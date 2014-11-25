@@ -10,6 +10,9 @@
 
 @implementation RSDestinationPDF
 
+// TODO: Add pages as some type of NSArray
+// TODO: Add elements via pages
+
 - (void)setCurrentPage:(NSUInteger)currentPage;
 {
     _currentPage = currentPage;
